@@ -1,0 +1,14 @@
+﻿<NavigationWindow 
+    x:Class="Demo.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Voice Idioms Chaining Game @ BJTU Speech Group 2009" 
+    Height="600" Width="800" 
+    WindowStartupLocation="CenterScreen" 
+    Source = "Menu.xaml" 
+    ResizeMode="NoResize" 
+    ShowsNavigationUI="False"
+    Background="GhostWhite" 
+    WindowStyle="SingleBorderWindow"
+    Icon="/SPG;component/Resources/Game.ico">
+</NavigationWindow>
