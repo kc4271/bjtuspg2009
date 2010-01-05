@@ -1,0 +1,9 @@
+﻿<Page x:Class="Demo.Feed"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Feeding" Height="560" Width="800">
+    <Grid>
+        <TextBlock Margin="100,50,100,0" Style="{DynamicResource TitleCenter-Sketch}" VerticalAlignment="Top" Height="46" Text="Show Feeding Stuff"/>
+        <Button Margin="0,0,50,50" Style="{DynamicResource Button-Sketch}" VerticalAlignment="Bottom" Height="50" Name="btnBack" Content="Go Back" Click="btnBack_Click" HorizontalAlignment="Right" Width="150" FontSize="28" />
+    </Grid>
+</Page>
