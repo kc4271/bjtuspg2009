@@ -1,0 +1,13 @@
+= Things To Do =
+
+  * 动画实现
+
+  * Adventure页面
+
+  * Chaining页面
+
+  * GameMain页面
+
+  * 主菜单逻辑 第一次Register 否则GameMain
+
+  * LoadGame页面
