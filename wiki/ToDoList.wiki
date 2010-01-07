@@ -1,19 +1,19 @@
 = To Do List =
 
-* ~~动画元素的实现~~ *DONE*
+  * ~~动画元素的实现~~ *DONE*
 
-* ~~Adventure页面基本功能~~ *DONE*
+  * ~~Adventure页面基本功能~~ *DONE*
 
-* GameMain页面基本功能
+  * GameMain页面基本功能
 
-* Chaining页面读取数据库 完成游戏逻辑 文本框输入
+  * Chaining页面读取数据库 完成游戏逻辑 文本框输入
 
-* Menu页面逻辑,FirstTime-Register,Otherowise-GameMain
+  * Menu页面逻辑,FirstTime-Register,Otherowise-GameMain
 
-* 完善Register页面:复选框默认选项,图片,文本框合法性检查
+  * 完善Register页面:复选框默认选项,图片,文本框合法性检查
 
-* 完善存档XML,实现游戏信息的正确存取
+  * 完善存档XML,实现游戏信息的正确存取
 
-* Shopping页面基本功能
+  * Shopping页面基本功能
 
-* LoadGame页面基本功能
+  * LoadGame页面基本功能
