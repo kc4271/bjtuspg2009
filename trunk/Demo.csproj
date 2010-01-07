@@ -96,6 +96,7 @@
     <Compile Include="GameMain.xaml.cs">
       <DependentUpon>GameMain.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Global\Super.cs" />
     <Compile Include="LoadGame.xaml.cs">
       <DependentUpon>LoadGame.xaml</DependentUpon>
     </Compile>
@@ -175,6 +176,27 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Game.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Background\Map.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Animal\Doggy.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Background\Box.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Background\Arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Background\Box0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Animal\Stand0.png" />
+    <Resource Include="Resources\Animal\Stand1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

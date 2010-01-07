@@ -2,13 +2,9 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="Shopping" Height="560" Width="800" Loaded="Page_Loaded">
-    <Grid>
-        <TextBlock Margin="100,50,100,0" Style="{DynamicResource TitleCenter-Sketch}" VerticalAlignment="Top" Height="46" Text="Show Shopping Stuff"/>
-        <Button Margin="400,0,0,50" Style="{DynamicResource Button-Sketch}" VerticalAlignment="Bottom" Height="50" Name="btnBuy" Content="Buy" Click="btnBuy_Click" HorizontalAlignment="Left" Width="150" FontSize="28" />
-        <Button Margin="0,0,50,50" Style="{DynamicResource Button-Sketch}" VerticalAlignment="Bottom" Height="50" Name="btnCancel" Content="Cancel" Click="btnCancel_Click" HorizontalAlignment="Right" Width="150" FontSize="28" />
-        <TextBlock Margin="88,152,312,0" Style="{DynamicResource TitleCenter-Sketch}" HorizontalAlignment="Stretch" Foreground="#336A87BC" VerticalAlignment="Top" Height="40"><Run Text="Item List"/><LineBreak/><Run Text=""/></TextBlock>
-        <TextBlock Margin="88,196,312,0" Style="{DynamicResource TitleCenter-Sketch}" HorizontalAlignment="Stretch" Foreground="#336A87BC" VerticalAlignment="Top" Height="40"><Run Text="Item List"/><LineBreak/><Run Text=""/></TextBlock>
-        <TextBlock Margin="88,240,312,0" Style="{DynamicResource TitleCenter-Sketch}" HorizontalAlignment="Stretch" Foreground="#336A87BC" VerticalAlignment="Top" Height="40"><Run Text="Item List"/><LineBreak/><Run Text=""/></TextBlock>
-        <TextBlock Margin="88,0,312,240" Style="{DynamicResource TitleCenter-Sketch}" HorizontalAlignment="Stretch" Foreground="#336A87BC" VerticalAlignment="Bottom" Height="40"><Run Text="Item List"/><LineBreak/><Run Text=""/></TextBlock>
-    </Grid>
+    <Canvas>
+        <TextBlock Style="{DynamicResource TitleCenter-Sketch}" VerticalAlignment="Top" Height="46.676" Text="Show Shopping Stuff" Canvas.Left="226.712" Canvas.Top="73.348" Width="370.074" />
+        <Button Style="{DynamicResource Button-Sketch}" VerticalAlignment="Bottom" Height="50" Name="btnBuy" Content="Buy" Click="btnBuy_Click" HorizontalAlignment="Left" Width="150.03" FontSize="28" Canvas.Left="360.072" Canvas.Top="461.759" />
+        <Button Style="{DynamicResource Button-Sketch}" VerticalAlignment="Bottom" Height="50" Name="btnCancel" Content="Cancel" Click="btnCancel_Click" HorizontalAlignment="Right" Width="150.03" FontSize="28" Canvas.Left="608.455" Canvas.Top="461.769" />
+    </Canvas>
 </Page>

@@ -18,6 +18,7 @@ namespace Demo
         public App()
         {
             InitializeComponent();
+            
             FileInfo fi = new FileInfo("userinfo.xml");
             if (!fi.Exists)
                 ConfigClass.UserInfoGenerater();
@@ -37,7 +38,7 @@ namespace Demo
                 xmlTextReader.WhitespaceHandling = WhitespaceHandling.None;
                 while (xmlTextReader.Read())
                 {
-                    if(xmlTextReader.Name == "CUserInfo")
+                    if (xmlTextReader.Name == "CUserInfo")
                     {
                         xmlTextReader.Read();
                         username = xmlTextReader.ReadElementContentAsString();
@@ -55,8 +56,10 @@ namespace Demo
                 string strFileName = AppDomain.CurrentDomain.BaseDirectory.ToString() + "userinfo.xml";
                 doc.Load(strFileName);
                 XmlNode rootnode = doc.SelectSingleNode("CUserInfo");
+                if (configValue.Length == 0)
+                    configValue = "username";       
                 rootnode.FirstChild.FirstChild.Value = configValue;
-                doc.Save(strFileName); 
+                doc.Save(strFileName);
             }
 
             public static void UserInfoGenerater()
