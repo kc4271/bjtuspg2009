@@ -6,8 +6,8 @@
 
   * Chaining
 
-  * GameMain
+  * GameMain 
 
-  * 主菜单逻辑,第一次Register,否则GameMain
+  * 主菜单逻辑,第一次Register,否则GameMain 
 
-  * LoadGame
+  * LoadGame 
