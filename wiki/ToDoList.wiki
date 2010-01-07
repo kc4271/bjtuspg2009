@@ -2,12 +2,12 @@
 
   * 动画实现
 
-  * Adventure页面
+  * Adventure
 
-  * Chaining页面
+  * Chaining
 
-  * GameMain页面
+  * GameMain
 
-  * 主菜单逻辑 第一次Register 否则GameMain
+  * 主菜单逻辑,第一次Register,否则GameMain
 
-  * LoadGame页面
+  * LoadGame
