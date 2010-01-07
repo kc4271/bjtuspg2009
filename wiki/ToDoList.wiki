@@ -1,2 +1,1 @@
-= Things To Do =
 <P><STRIKE>动画元素的实现</STRIKE> <Font color=#FF0000>Done</Font></P><P><STRIKE>Adventure页面基本功能</STRIKE> <Font color=#ff0000>Done</Font></P><P>GameMain页面基本功能</P><P>Chaining页面读取数据库 完成游戏逻辑 文本框输入</P><P>Menu页面逻辑,FirstTime-&gt;Register,Otherowise-&gt;GameMain</P><P>完善Register页面:复选框默认选项,图片,文本框合法性检查</P><P>完善存档XML,实现游戏信息的正确存取</P><P>Shopping页面基本功能</P><P>LoadGame页面基本功能</P><P></P>
