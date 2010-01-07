@@ -2,14 +2,8 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="LoadGame" Height="560" Width="800">
-    <Grid>
+    <Canvas>
         <TextBlock Margin="226,52,224,0" Style="{DynamicResource TitleCenter-Sketch}" VerticalAlignment="Top" Height="46" Text="Choose Your Profile"/>
-        <Button HorizontalAlignment="Right" Margin="0,0,50,50" Style="{DynamicResource Button-Sketch}" Name="btnConfirm" Width="150" FontSize="28" Height="50" VerticalAlignment="Bottom" Click="btnAdventure_Click">GO!</Button>
-        <TextBlock Margin="88,160,312,0" Style="{DynamicResource TitleCenter-Sketch}" Text="Here's the Profile List" HorizontalAlignment="Stretch" Foreground="#FF005AFF" VerticalAlignment="Top" Height="40" Opacity="0.2"/>
-        <TextBlock Margin="88,204,312,0" Style="{DynamicResource TitleCenter-Sketch}" Text="Here's the Profile List" HorizontalAlignment="Stretch" Foreground="#FF005AFF" VerticalAlignment="Top" Height="40" Opacity="0.2"/>
-        <TextBlock Margin="88,248,312,272" Style="{DynamicResource TitleCenter-Sketch}" Text="Here's the Profile List" HorizontalAlignment="Stretch" Foreground="#FF005AFF" Opacity="0.2"/>
-        <TextBlock Margin="88,0,312,228" Style="{DynamicResource TitleCenter-Sketch}" Text="Here's the Profile List" HorizontalAlignment="Stretch" Foreground="#FF005AFF" VerticalAlignment="Bottom" Height="40" Opacity="0.2"/>
-        <TextBlock Margin="88,0,312,184" Style="{DynamicResource TitleCenter-Sketch}" Text="Here's the Profile List" HorizontalAlignment="Stretch" Foreground="#FF005AFF" VerticalAlignment="Bottom" Height="40" Opacity="0.2"/>
-        <TextBlock Margin="258.55,0,213.45,50" Style="{DynamicResource TitleCenter-Sketch}" Text="Choose one and Press" HorizontalAlignment="Stretch" Foreground="#FF005AFF" VerticalAlignment="Bottom" Height="50" Opacity="0.2"/>
-    </Grid>
+        <Button Margin="0,0,50,50" Style="{DynamicResource Button-Sketch}" VerticalAlignment="Bottom" Height="50.01" Name="btnConfirm" Content="Go!" Click="btnAdventure_Click" HorizontalAlignment="Right" Width="150" FontSize="28" Canvas.Left="600" Canvas.Top="470" />
+    </Canvas>
 </Page>

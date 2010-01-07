@@ -20,13 +20,7 @@ namespace Demo
     {
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            // go back
             this.NavigationService.Navigate(new Uri("GameMain.xaml", UriKind.Relative));
-        }
-
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
