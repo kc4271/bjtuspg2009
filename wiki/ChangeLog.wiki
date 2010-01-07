@@ -1,11 +1,5 @@
-= Instructions =
 
-SVN过滤列表:
-{{{
-*.sln *.suo *.user *.bak *.sql .cache .project *.db  .settings *.zip *.rar *~ *.txt cache obj bin
-}}}
-
-= Details =
+= 更新日志 =
 
 * 2009.12.05 Demo Version 0.3 完成基本菜单逻辑 朱老师已阅
 
