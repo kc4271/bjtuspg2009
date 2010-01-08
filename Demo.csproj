@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{C8855B15-A9DF-4AE5-BA40-EF77D07439CF}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -152,6 +152,7 @@
     <Resource Include="Fonts\SegoeMarker.ttf" />
     <Resource Include="Fonts\SketchFlowPrint.ttf" />
     <None Include="App.config" />
+    <Resource Include="Fonts\YY.ttf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -221,6 +222,8 @@
     <Resource Include="Resources\Animal\Stand1.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\Background\Arrow1.png" />
+    <Resource Include="Resources\Background\Home.png" />
     <Content Include="Resources\DB\db.mdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
