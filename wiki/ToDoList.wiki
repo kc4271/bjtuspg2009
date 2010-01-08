@@ -6,7 +6,7 @@
 
   * GameMain页面基本功能
 
-  * Chaining页面读取数据库 完成游戏逻辑 文本框输入
+  * ~~Chaining页面读取数据库 完成游戏逻辑 文本框输入~~ *DONE*
 
   * Menu页面逻辑,FirstTime-Register,Otherowise-GameMain
 
