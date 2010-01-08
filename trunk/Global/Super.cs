@@ -11,7 +11,7 @@ namespace Demo.Global
     public static class Super
     {       
         /// <summary>
-        /// 将N帧图片合成一张8方向角色各动作分布图
+        /// 将N帧图片合成一张各方向角色各动作分布图
         /// </summary>
         /// <param name="SourcePath">源文件路径</param>
         /// <param name="SavaToPath">保存文件到目标路径</param>
