@@ -31,5 +31,16 @@ namespace Demo.Properties {
                 return ((string)(this["Username"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Provider=Microsoft.Jet.OLEDB.4.0;Data Source=|DataDirectory|\\Resources\\DB\\db.mdb;" +
+            "Persist Security Info=True")]
+        public string dbConnectionString {
+            get {
+                return ((string)(this["dbConnectionString"]));
+            }
+        }
     }
 }
