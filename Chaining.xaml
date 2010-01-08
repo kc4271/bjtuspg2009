@@ -1,10 +1,17 @@
 ﻿<Page x:Class="Demo.Chaining"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="Chaining" Height="560" Width="800">
+    Title="Chaining" Height="560" Width="800" Loaded="Page_Loaded">
     <Canvas>
-        <TextBox Style="{DynamicResource BasicTextBox-Sketch}" TextWrapping="Wrap" HorizontalAlignment="Right" Width="300.06" FontSize="45" Name="txtAnswer" Height="51.677" VerticalAlignment="Bottom" Canvas.Left="68.347" Canvas.Top="103.354" />
-        <TextBlock Style="{DynamicResource BodyCenter-Sketch}" Height="50" Width="300.06" FontSize="45" Canvas.Left="451.757" Canvas.Top="105.031" Name="txtQuestion" Text="勤能补拙" />
-        <TextBlock Style="{DynamicResource BodyCenter-Sketch}" Height="50.01" Width="50.01" FontSize="45" Canvas.Left="381.743" Canvas.Top="261.719" Text="VS" />
+        <TextBox Style="{DynamicResource BasicTextBox-Sketch}" TextWrapping="Wrap" HorizontalAlignment="Right" Width="208.375" FontSize="45" Name="txtAnswer" Height="51.677" VerticalAlignment="Bottom" Canvas.Left="38.341" Canvas.Top="103.354" />
+        <TextBlock Style="{DynamicResource BodyCenter-Sketch}" Height="50" Width="301.727" FontSize="45" Canvas.Left="381.743" Canvas.Top="105.031" Name="txtQuestion"></TextBlock>
+        <TextBlock Style="{DynamicResource BodyCenter-Sketch}" Height="50.01" Width="60.012" FontSize="45" Canvas.Left="381.743" Canvas.Top="261.719" Text="VS" />
+        <TextBlock Style="{DynamicResource BodyCenter-Sketch}" Height="50.01" Width="208.375" FontSize="19" Canvas.Left="38.341" Canvas.Top="15.003" Name="txtScore" Text="Score" />
+        <TextBlock Style="{DynamicResource BodyCenter-Sketch}" Height="50.01" Width="208.375" FontSize="19" Canvas.Left="555.111" Canvas.Top="15.003" Name="txtPassLeft" Text="Pass Left" />
+        <TextBlock Style="{DynamicResource BodyCenter-Sketch}" Height="50.01" Width="198.373" FontSize="45" Canvas.Left="305.061" Canvas.Top="190.038" Name="txtStatus" />
+        <Button Style="{DynamicResource Button-Sketch}" Name="btnSubmit" Height="50" Width="66.68" Click="btnSubmit_Click" FontSize="32" Content="OK" Canvas.Left="258.385" Canvas.Top="103.354" />
+        <Button Canvas.Left="696.806" Canvas.Top="103.354" FontSize="32" Height="50" Name="btnPass" Style="{DynamicResource Button-Sketch}" Width="85.017" Click="btnPass_Click">PASS</Button>
+        <TextBlock Canvas.Left="305.061" Canvas.Top="515.103" FontSize="25" Height="30.006" Style="{DynamicResource BodyCenter-Sketch}" Name="txtDebug" Width="223.378" MouseLeftButtonDown="txtDebug_MouseLeftButtonDown"/><Image Canvas.Left="98.353" Canvas.Top="220.044" Height="193.372" Name="image1" Stretch="Fill" Width="226.712" Source="/SPG;component/Resources/Animal/Stand1.png" /><Image Canvas.Left="513.436" Canvas.Top="220.044" Height="193.372" Name="image2" Stretch="Fill" Width="211.709" Source="/SPG;component/Resources/Background/Box.png" />
+       
     </Canvas>
 </Page>
