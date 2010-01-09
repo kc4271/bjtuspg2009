@@ -3,14 +3,17 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="Chaining" Height="560" Width="800" Loaded="Page_Loaded">
     <Canvas>
-        <TextBox Style="{DynamicResource BasicTextBox-Sketch}" TextWrapping="Wrap" HorizontalAlignment="Right" Width="208.375" FontSize="45" Name="txtAnswer" Height="51.677" VerticalAlignment="Bottom" Canvas.Left="38.341" Canvas.Top="153.364" />
+        <TextBox Style="{DynamicResource BasicTextBox-Sketch}" TextWrapping="NoWrap" HorizontalAlignment="Right" Width="208.375" FontSize="45" Name="txtAnswer" Height="51.677" VerticalAlignment="Bottom" Canvas.Left="38.341" Canvas.Top="153.364" MaxLines="1" MaxLength="10" />
         <TextBlock Style="{DynamicResource BodyCenter-Sketch}" Height="50" Width="256.718" FontSize="45" Canvas.Left="373.408" Canvas.Top="153.364" Name="txtQuestion"></TextBlock>
-        <TextBlock Style="{DynamicResource BodyCenter-Sketch}" Height="50.01" Width="208.375" FontSize="25" Canvas.Left="38.341" Canvas.Top="36.674" Name="txtScore" Text="Score" />
-        <TextBlock Style="{DynamicResource BodyCenter-Sketch}" Height="50.01" Width="208.375" FontSize="25" Canvas.Left="555.111" Canvas.Top="36.674" Name="txtPassLeft" Text="Pass Left" />
-        <TextBlock Style="{DynamicResource BodyCenter-Sketch}" Height="50.01" Width="198.373" FontSize="45" Canvas.Left="305.061" Canvas.Top="36.674" Name="txtStatus" />
-        <Button Style="{DynamicResource Button-Sketch}" Name="btnSubmit" Height="50.01" Width="66.68" Click="btnSubmit_Click" FontSize="32" Content="OK" Canvas.Left="258.385" Canvas.Top="153.364" />
+        <TextBlock Style="{DynamicResource BodyCenter-Sketch}" Height="50.01" Width="208.375" FontSize="25" Canvas.Left="38.341" Canvas.Top="36.674" Name="txtScore" />
+        <TextBlock Style="{DynamicResource BodyCenter-Sketch}" Height="50.01" Width="208.375" FontSize="25" Canvas.Left="555.111" Canvas.Top="36.674" Name="txtPassLeft" />
+        <TextBlock Style="{DynamicResource BodyCenter-Sketch}" Height="50.01" Width="800" FontSize="40" Canvas.Left="0" Canvas.Top="236.714" Name="txtStatus" />
+        <Button Style="{DynamicResource Button-Sketch}" Name="btnSubmit" Height="50.01" Width="116.69" Click="btnSubmit_Click" FontSize="32" Content="确认" Canvas.Left="258.385" Canvas.Top="153.364" />
         <Button Canvas.Left="645.129" Canvas.Top="155.041" FontSize="32" Height="50" Name="btnPass" Style="{DynamicResource Button-Sketch}" Width="118.357" Click="btnPass_Click">PASS</Button>
-        <TextBlock Canvas.Left="305.061" Canvas.Top="515.103" FontSize="25" Height="30.006" Style="{DynamicResource BodyCenter-Sketch}" Name="txtDebug" Width="223.378" MouseLeftButtonDown="txtDebug_MouseLeftButtonDown"/><Image Canvas.Left="182.716" Canvas.Top="349.416" Height="64" Name="image1" Stretch="Fill" Width="64" Source="/SPG;component/Resources/Animal/Stand1.png" /><Image Canvas.Left="613.456" Canvas.Top="317.416" Height="96" Name="image2" Stretch="Fill" Width="96.686" Source="/SPG;component/Resources/Background/Box.png" />
-       
+        <TextBlock Canvas.Left="0" Canvas.Top="529.994" FontSize="25" Height="30.006" Style="{DynamicResource BodyCenter-Sketch}" Name="txtDebug" Width="800" />
+        <Image Canvas.Left="182.716" Canvas.Top="301.727" Height="63.346" Name="image1" Stretch="Fill" Width="64" Source="/SPG;component/Resources/Animal/Stand1.png" /><Image Canvas.Left="605.121" Canvas.Top="285.057" Height="96.686" Name="image2" Stretch="Fill" Width="96.686" Source="/SPG;component/Resources/Background/Box.png" />
+        <Button Style="{DynamicResource Button-Sketch}" Name="btnItem1" Height="50.01" Width="150.03" FontSize="32" Content="道具1" Canvas.Left="50" Canvas.Top="443.422" Click="btnItem1_Click" ToolTip="增加一次Pass机会"/>
+        <Button Style="{DynamicResource Button-Sketch}" Name="btnItem2" Height="50.01" Width="150.03" FontSize="32" Content="道具2" Canvas.Left="225" Canvas.Top="443.422" Click="btnItem2_Click"  ToolTip="减一分换取一次提示"/>
+        <Button Style="{DynamicResource Button-Sketch}" Name="btnBack" Height="50.01" Width="100" Click="btnBack_Click"  FontSize="32" Content="放弃" Canvas.Left="663.486" Canvas.Top="443.422" />
     </Canvas>
 </Page>

@@ -64,6 +64,7 @@ public class DBControl
             return reader;
         }
     }
+
     /// <summary>
     /// 判断OleDbDataReader是否有内容
     /// *必须先调用ExecuteReader()

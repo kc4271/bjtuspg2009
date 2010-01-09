@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{C8855B15-A9DF-4AE5-BA40-EF77D07439CF}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -148,9 +148,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Resource Include="Fonts\BuxtonSketch.ttf" />
-    <Resource Include="Fonts\SegoeMarker.ttf" />
-    <Resource Include="Fonts\SketchFlowPrint.ttf" />
     <None Include="App.config" />
     <Resource Include="Fonts\YY.ttf" />
     <None Include="Properties\Settings.settings">
@@ -222,8 +219,12 @@
     <Resource Include="Resources\Animal\Stand1.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Background\Arrow1.png" />
+    <Resource Include="Resources\Background\Arrow1.png">
+    </Resource>
     <Resource Include="Resources\Background\Home.png" />
+    <Content Include="Profile\Profile.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\DB\db.mdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
