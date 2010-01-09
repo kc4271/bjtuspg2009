@@ -167,15 +167,9 @@ public class DBControl
     public DBControl()
     {
         conn = new OleDbConnection();
-        conn.ConnectionString = @"Provider=Microsoft.Jet.OLEDB.4.0; Data Source=Resources\DB\db.mdb";
+        conn.ConnectionString = ConfigurationManager.ConnectionStrings["dbConnectionString"].ConnectionString;  // App.config中dbConnectionString标签
         conn.Open();
         cmd = new OleDbCommand();
         cmd.Connection = conn;
     }
-    /*
-    ~DBControl()
-    {
-        CloseConntion();
-    }
-     * */
 }

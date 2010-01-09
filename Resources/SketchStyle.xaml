@@ -26,7 +26,7 @@
     <SolidColorBrush x:Key="SelectedBackground-Sketch" Color="#FFAFAFAF"/>
     <FontFamily x:Key="FontFamily-Sketch">/SPG;Component/Fonts/#汉仪丫丫体简</FontFamily>
     <sys:Double x:Key="SizeDouble-Sketch">19</sys:Double>
-    <FontWeight x:Key="FontWeight-Sketch">Normal</FontWeight>
+    <FontWeight x:Key="FontWeight-Sketch">Heavy</FontWeight>
 
     <!-- Basic Sketch TextBlock -->
     <Style x:Key="BasicTextBlock-Sketch" TargetType="{x:Type TextBlock}" d:StyleDefaultContent="Basic Text">
@@ -35,10 +35,12 @@
         <Setter Property="FontFamily" Value="{DynamicResource FontFamily-Sketch}"/>
         <Setter Property="FontSize" Value="16"/>
         <Setter Property="Foreground" Value="{DynamicResource BaseForeground-Sketch}"/>
+        <Setter Property="FontWeight" Value="{DynamicResource FontWeight-Sketch}"/>
     </Style>
 
     <!-- Sketch TextBlock -->
-    <Style x:Key="TextBlock-Sketch" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BasicTextBlock-Sketch}"/>
+    <Style x:Key="TextBlock-Sketch" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource BasicTextBlock-Sketch}">
+    </Style>
 
     <!-- Sketch Rectangle -->
     <Style x:Key="Rectangle-Sketch" TargetType="{x:Type SketchControls:SketchRectangleUC}">
@@ -1191,6 +1193,7 @@
         <Setter Property="Foreground" Value="{StaticResource BaseBorder-Sketch}"/>
         <Setter Property="BorderBrush" Value="{StaticResource BaseBorder-Sketch}"/>
         <Setter Property="Background" Value="{StaticResource BaseBackground-Sketch}"/>
+        <Setter Property="FontWeight" Value="{DynamicResource FontWeight-Sketch}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">

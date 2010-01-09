@@ -10,7 +10,7 @@
         <Button Height="50" Width="120.024" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="188,0,0,50" Name="btnFeed" Click="btnFeed_Click" Style="{DynamicResource Button-Sketch}" FontSize="28" Canvas.Left="5.001" Canvas.Top="470">Feed</Button>
         <Button Height="50" VerticalAlignment="Bottom" Margin="328,0,352,50" Name="btnShopping" Click="btnShopping_Click"  Style="{DynamicResource Button-Sketch}" FontSize="22" Canvas.Left="8.335" Canvas.Top="470" Width="110.022">Shopping</Button>
         <Button Height="50" Width="120.024" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,212,50" Name="btnHelp" Click="btnHelp_Click" Style="{DynamicResource Button-Sketch}" FontSize="28" Canvas.Left="465.093" Canvas.Top="470.01">Help</Button>
-        <Button Margin="0,0,50,50" Style="{DynamicResource Button-Sketch}" VerticalAlignment="Bottom" Height="50.01" Name="btnBack" Content="Go Back" Click="btnBack_Click" HorizontalAlignment="Right" Width="150" FontSize="28" Canvas.Left="600" Canvas.Top="470" />
+        <Button Margin="0,0,50,50" Style="{DynamicResource Button-Sketch}" VerticalAlignment="Bottom" Height="50.01" Name="btnBack" Content="返回" Click="btnBack_Click" HorizontalAlignment="Right" Width="150" FontSize="28" Canvas.Left="600" Canvas.Top="470" />
         <Image Canvas.Left="672" Canvas.Top="338.401" Height="96.686" Name="imgArrow1" Stretch="Fill" Width="128" Source="/SPG;component/Resources/Background/Arrow1.png" MouseLeftButtonDown="imgArrow1_MouseLeftButtonDown"/> 
         
     </Canvas>
