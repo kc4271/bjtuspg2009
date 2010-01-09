@@ -11,13 +11,17 @@
   * ~~Shopping页面框架~~ *DONE*
 
   * ~~LoadGame页面框架~~ *DONE*
+  
+  * ~~Shopping页面和LoadGame页面的基本数据绑定~~ *DONE*
+
+  * Menu页面逻辑,FirstTime-Register,Otherwise-GameMain
+
+  * 完善Register页面:复选框默认选项,图片,文本框合法性检查
 
   * 封装所有动画操作到Globle
 
   * 完善存档XML,实现游戏信息的正确存取
+ 
+  * 分解整理搜集处理图片资源
 
-  * 主要页面的数据绑定
-
-  * Menu页面逻辑,FirstTime-Register,Otherowise-GameMain
-
-  * 完善Register页面:复选框默认选项,图片,文本框合法性检查
+  * 添加图片资源,美化程序界面和细节
