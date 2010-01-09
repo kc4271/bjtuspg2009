@@ -8,13 +8,15 @@
 
   * ~~Chaining页面读取数据库 完成游戏逻辑 文本框输入~~ *DONE*
 
+  * ~~Shopping页面框架~~ *DONE*
+
+  * ~~LoadGame页面框架~~ *DONE*
+
   * 封装所有动画操作到Globle
 
   * 完善存档XML,实现游戏信息的正确存取
 
-  * Shopping页面基本功能
-
-  * LoadGame页面基本功能
+  * 主要页面的数据绑定
 
   * Menu页面逻辑,FirstTime-Register,Otherowise-GameMain
 
