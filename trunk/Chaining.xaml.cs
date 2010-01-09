@@ -22,25 +22,23 @@ namespace Demo
     /// </summary>
     public partial class Chaining : Page
     {
-
-        Random ro = new Random();
-        int iScore;
-        int iPass;
-        int iWinScore;
+        private Random ro = new Random();
+        private int iScore;
+        private int iPass;
+        private int iWinScore;
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             LoadIdioms();
             iScore = 0;     // 当前得分
-            iPass = 20;     // Pass次数
-            iWinScore = 5;  // 赢得本局需要的得分
+            iPass = 10;     // Pass次数
+            iWinScore = 10;  // 赢得本局需要的得分
             txtScore.Text = "分数:" + iScore.ToString();
             txtPassLeft.Text = "剩余 " + iPass.ToString() + " 次机会";
         }
 
         private void LoadIdioms()
         {
-            txtStatus.Text = "";
             int iRandom;
             while (true)
             {
@@ -76,27 +74,22 @@ namespace Demo
             DBControl db = new DBControl();
             try
             {
-                db.CommandText = "SELECT ChengYu FROM ChengYu WHERE ChengYu LIKE '" + sLastCharacter + "%'";
-                db.ExecuteReader();
-                if (db.Reader.Read())
+                DataSet ds = new DataSet();
+                OleDbDataAdapter a = new OleDbDataAdapter("SELECT ChengYu FROM ChengYu WHERE ChengYu LIKE '" + sLastCharacter + "%'", db.Connection);
+                a.Fill(ds);
+                int rs = ds.Tables[0].Rows.Count;
+
+                if (rs > 0)
                 {
-                    txtQuestion.Text = db.Reader[0].ToString();
+                    txtQuestion.Text = ds.Tables[0].Rows[ro.Next(rs)].ItemArray[0].ToString();
                 }
                 else
                 {
-                    MessageBox.Show("找不到以 " + sLastCharacter + " 开头的成语,你得了1分");
-                    // 分数操作
-                    iScore++;
-                    txtScore.Text = "SCORE:" + iScore.ToString();
-                    if (iScore >= iWinScore)
-                    {
-                        MessageBox.Show("Cool! You're good at it!");
-                        this.NavigationService.Navigate(new Uri("Adventure.xaml", UriKind.Relative));
-                    }
-                    else
-                    {
-                        LoadIdioms();
-                    }
+                    txtStatus.Text = "没有以\"" + sLastCharacter + "\"开头的成语,加一次Pass机会";
+                    iPass++;
+                    txtPassLeft.Text = "剩余 " + iPass.ToString() + " 次机会";
+                    db.CloseConntion();
+                    LoadIdioms();
                 }
             }
             catch (Exception ex)
@@ -113,9 +106,11 @@ namespace Demo
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
+            txtDebug.Text = "";
+
             if (txtAnswer.Text == "" || txtAnswer.Text.Substring(0, 1) != txtQuestion.Text.Substring(txtQuestion.Text.Length - 1, 1))
             {
-                txtStatus.Text = "Wrong!";
+                txtStatus.Text = "错误!";
                 return;
             }
 
@@ -127,23 +122,24 @@ namespace Demo
                 db.ExecuteReader();
                 if (db.Reader.Read())
                 {
-                    txtStatus.Text = "Yes";
+                    txtStatus.Text = "回答正确,加1分!";
                     // 分数操作
                     iScore++;
-                    txtScore.Text = "SCORE:" + iScore.ToString();
+                    txtScore.Text = "分数:" + iScore.ToString();
                     if (iScore >= iWinScore)
                     {
-                        MessageBox.Show("Cool! You're good at it!");
+                        MessageBox.Show("恭喜你顺利打开宝箱!");
                         this.NavigationService.Navigate(new Uri("Adventure.xaml", UriKind.Relative));
                     }
                     else
                     {
+                        db.CloseConntion();
                         LoadIdioms(txtAnswer.Text.Substring(txtAnswer.Text.Length - 1, 1));
                     }
                 }
                 else
                 {
-                    txtStatus.Text = "Not Found!";
+                    txtStatus.Text = "这个词不是成语!";
                 }
             }
             catch (Exception ex)
@@ -155,7 +151,6 @@ namespace Demo
             {
                 db.CloseConntion();
             }
-
         }
 
         private void btnPass_Click(object sender, RoutedEventArgs e)
@@ -163,15 +158,21 @@ namespace Demo
             if (iPass > 0)
             {
                 iPass--;
-                txtPassLeft.Text = iPass.ToString() + " PASS LEFT";
-                txtStatus.Text = "";
+                txtPassLeft.Text = "剩余 " + iPass.ToString() + " 次机会";
+                txtStatus.Text = "PASS";
                 LoadIdioms(txtQuestion.Text.Substring(txtQuestion.Text.Length - 1, 1));
             }
             else
             {
-                MessageBox.Show("Sorry, you LOSE!");
+                MessageBox.Show("对不起,已经没有Pass机会了.");
                 this.NavigationService.Navigate(new Uri("Adventure.xaml", UriKind.Relative));
             }
+        }
+
+        private void btnItem1_Click(object sender, RoutedEventArgs e)
+        {
+            iPass++;
+            txtPassLeft.Text = "剩余 " + iPass.ToString() + " 次机会";
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
@@ -179,27 +180,31 @@ namespace Demo
             this.NavigationService.Navigate(new Uri("Adventure.xaml", UriKind.Relative));
         }
 
-        // Debug Fuction
-        private void txtDebug_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void btnItem2_Click(object sender, RoutedEventArgs e)
         {
+            iScore--;
+            txtScore.Text = "分数:" + iScore.ToString();
             DBControl db = new DBControl();
             try
             {
-                db.CommandText = "SELECT ChengYu FROM ChengYu WHERE ChengYu LIKE '" +
-                    txtQuestion.Text.Substring(txtQuestion.Text.Length - 1, 1) + "%'";
-                db.ExecuteReader();
-                if (db.Reader.Read())
+                DataSet ds = new DataSet();
+                OleDbDataAdapter a = new OleDbDataAdapter("SELECT ChengYu FROM ChengYu WHERE ChengYu LIKE '" +
+                    txtQuestion.Text.Substring(txtQuestion.Text.Length - 1, 1) + "%'", db.Connection);
+                a.Fill(ds);
+                int rs = ds.Tables[0].Rows.Count;
+
+                if (rs > 0)
                 {
-                    txtDebug.Text = db.Reader[0].ToString();
+                    txtDebug.Text = ds.Tables[0].Rows[ro.Next(rs)].ItemArray[0].ToString();
                 }
                 else
                 {
-                    txtDebug.Text = "找不到了";
+                    txtDebug.Text = "这个我也不会...";
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Debug Function Exception!");
+                MessageBox.Show("Item2 Function Exception!");
                 MessageBox.Show(ex.ToString());
             }
             finally

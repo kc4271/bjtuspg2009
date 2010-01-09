@@ -18,26 +18,30 @@ namespace Demo
     /// </summary>
     public partial class Shopping : Page
     {
-        // 需要一个pageloaded加载商店信息
+        private int Item1Price = 50;
+        private int Item2Price = 100;
+        private int TotalPrice;
+
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-
+            comboBox_DropDownClosed(sender, e);
         }
-        
+
         private void btnBuy_Click(object sender, RoutedEventArgs e)
         {
-            // do buy things
-
+            // 
             this.NavigationService.Navigate(new Uri("GameMain.xaml", UriKind.Relative));
-
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            // do cancel
-
             this.NavigationService.Navigate(new Uri("GameMain.xaml", UriKind.Relative));
+        }
 
+        private void comboBox_DropDownClosed(object sender, EventArgs e)
+        {
+            TotalPrice = int.Parse(comboBox1.Text) * Item1Price + int.Parse(comboBox2.Text) * Item2Price;
+            txtPrice.Text = "总价:" + TotalPrice.ToString();
         }
     }
 }
