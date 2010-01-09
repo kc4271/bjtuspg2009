@@ -37,7 +37,7 @@ namespace Demo
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            // 显示当前信息
+             // 显示当前信息
             string tmp1, tmp2;
             App.ConfigClass.ReadConfig(out tmp1, out tmp2);
             txtUsername.Text = "HI," + tmp1;

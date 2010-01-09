@@ -21,14 +21,13 @@ namespace Demo
         // 需要一个pageloaded加载商店信息
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Shop Info Loaded.");
+
         }
         
         private void btnBuy_Click(object sender, RoutedEventArgs e)
         {
             // do buy things
 
-            // go back , not go to "GameMain"
             this.NavigationService.Navigate(new Uri("GameMain.xaml", UriKind.Relative));
 
         }
@@ -37,7 +36,6 @@ namespace Demo
         {
             // do cancel
 
-            // go back , not go to "GameMain"
             this.NavigationService.Navigate(new Uri("GameMain.xaml", UriKind.Relative));
 
         }

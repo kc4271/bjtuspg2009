@@ -23,5 +23,10 @@ namespace Demo
             this.NavigationService.Navigate(new Uri("GameMain.xaml", UriKind.Relative));
          
          }
+
+         private void btnDelete_Click(object sender, RoutedEventArgs e)
+         {
+
+         }
     }
 }

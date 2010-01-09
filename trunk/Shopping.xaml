@@ -3,8 +3,18 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="Shopping" Height="560" Width="800" Loaded="Page_Loaded">
     <Canvas>
-        <TextBlock Style="{DynamicResource TitleCenter-Sketch}" VerticalAlignment="Top" Height="46.676" Text="Show Shopping Stuff" Canvas.Left="226.712" Canvas.Top="73.348" Width="370.074" />
-        <Button Style="{DynamicResource Button-Sketch}" VerticalAlignment="Bottom" Height="50" Name="btnBuy" Content="Buy" Click="btnBuy_Click" HorizontalAlignment="Left" Width="150.03" FontSize="28" Canvas.Left="360.072" Canvas.Top="461.759" />
-        <Button Style="{DynamicResource Button-Sketch}" VerticalAlignment="Bottom" Height="50" Name="btnCancel" Content="Cancel" Click="btnCancel_Click" HorizontalAlignment="Right" Width="150.03" FontSize="28" Canvas.Left="608.455" Canvas.Top="461.769" />
+        <Button Style="{DynamicResource Button-Sketch}" VerticalAlignment="Bottom" Height="50" Name="btnBuy" Content="购买" Click="btnBuy_Click" HorizontalAlignment="Left" Width="150.03" FontSize="28" Canvas.Left="360.072" Canvas.Top="461.759" />
+        <Button Style="{DynamicResource Button-Sketch}" VerticalAlignment="Bottom" Height="50" Name="btnCancel" Content="取消" Click="btnCancel_Click" HorizontalAlignment="Right" Width="150.03" FontSize="28" Canvas.Left="608.455" Canvas.Top="461.769" />
+        <StackPanel Canvas.Left="100" Canvas.Top="100" Height="50" Name="stackPanel1" Width="300" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Height="50" Width="75.015" Text="购买" FontSize="35"/>
+            <ComboBox Style="{DynamicResource ComboBox-Sketch}" Height="40.009" Name="comboBox1" Width="100" IsEditable="False" SelectedIndex="0" FontSize="30">
+                <ComboBoxItem>1</ComboBoxItem>
+                <ComboBoxItem>5</ComboBoxItem>
+                <ComboBoxItem>10</ComboBoxItem>
+            </ComboBox>
+            <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Height="50" Width="120" Text="个物品" FontSize="35"/>
+        </StackPanel>
+        <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Height="50.01" Width="93.352" Text="总价:" FontSize="35" Canvas.Left="100" Canvas.Top="338.401" />
+        <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Height="50.01" Width="554.951" Name="iPrice" Text="数据绑定" FontSize="35" Canvas.Left="203.534" Canvas.Top="338.401" />
     </Canvas>
 </Page>

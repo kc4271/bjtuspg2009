@@ -4,6 +4,6 @@
     Title="Feeding" Height="560" Width="800">
     <Canvas>
         <TextBlock Margin="100,50,100,0" Style="{DynamicResource TitleCenter-Sketch}" VerticalAlignment="Top" Height="50" Text="Show Feeding Stuff" Canvas.Left="135" Canvas.Top="5" Width="350" />
-        <Button Style="{DynamicResource Button-Sketch}" Name="btnBack" Height="50" Width="200" Click="btnBack_Click" FontSize="32" Content="Go Back"  Canvas.Left="550" Canvas.Top="470" ToolTip="返回"/>
+        <Button Style="{DynamicResource Button-Sketch}" Name="btnBack" Height="50" Width="200" Click="btnBack_Click" FontSize="32" Content="返回"  Canvas.Left="550" Canvas.Top="470" ToolTip="返回"/>
     </Canvas>
 </Page>

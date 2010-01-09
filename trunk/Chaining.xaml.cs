@@ -31,11 +31,11 @@ namespace Demo
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             LoadIdioms();
-            iScore = 0;
-            iPass = 1000;
-            iWinScore = 3;
-            txtScore.Text = "SCORE:" + iScore.ToString();
-            txtPassLeft.Text = iPass.ToString() + " PASS LEFT";
+            iScore = 0;     // 当前得分
+            iPass = 20;     // Pass次数
+            iWinScore = 5;  // 赢得本局需要的得分
+            txtScore.Text = "分数:" + iScore.ToString();
+            txtPassLeft.Text = "剩余 " + iPass.ToString() + " 次机会";
         }
 
         private void LoadIdioms()
@@ -62,7 +62,8 @@ namespace Demo
             }
             catch (Exception ex)
             {
-                MessageBox.Show("连接本地MDB数据库发生错误：" + ex.ToString(), "错误！");
+                MessageBox.Show("LoadIdioms Function Exception!");
+                MessageBox.Show(ex.ToString());
             }
             finally
             {
@@ -72,25 +73,19 @@ namespace Demo
 
         private void LoadIdioms(String sLastCharacter)
         {
-            //MessageBox.Show(sLastCharacter);
-            //txtStatus.Text = "";
             DBControl db = new DBControl();
             try
             {
                 db.CommandText = "SELECT ChengYu FROM ChengYu WHERE ChengYu LIKE '" + sLastCharacter + "%'";
-
-                //db.CommandText = "SELECT ChengYu FROM ChengYu WHERE ChengYu LIKE '%阵'";
-                //db.AddParameter("s", sLastCharacter);
                 db.ExecuteReader();
-                //MessageBox.Show(db.CommandText);
                 if (db.Reader.Read())
                 {
                     txtQuestion.Text = db.Reader[0].ToString();
                 }
                 else
                 {
-                    
-                    MessageBox.Show("Oops, I Can't find an idom start with " + sLastCharacter + "! You win a score!");
+                    MessageBox.Show("找不到以 " + sLastCharacter + " 开头的成语,你得了1分");
+                    // 分数操作
                     iScore++;
                     txtScore.Text = "SCORE:" + iScore.ToString();
                     if (iScore >= iWinScore)
@@ -106,7 +101,8 @@ namespace Demo
             }
             catch (Exception ex)
             {
-                MessageBox.Show("连接本地MDB数据库发生错误：" + ex.ToString(), "错误！");
+                MessageBox.Show("LoadIdioms(string) Function Exception!");
+                MessageBox.Show(ex.ToString());
             }
             finally
             {
@@ -152,7 +148,8 @@ namespace Demo
             }
             catch (Exception ex)
             {
-                MessageBox.Show("连接本地MDB数据库发生错误：" + ex.ToString(), "错误！");
+                MessageBox.Show("Submit Function Exception!");
+                MessageBox.Show(ex.ToString());
             }
             finally
             {
@@ -181,14 +178,14 @@ namespace Demo
         {
             this.NavigationService.Navigate(new Uri("Adventure.xaml", UriKind.Relative));
         }
-        
+
         // Debug Fuction
         private void txtDebug_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
+            DBControl db = new DBControl();
             try
             {
-                DBControl db = new DBControl();
-                db.CommandText = "SELECT ChengYu FROM ChengYu WHERE ChengYu LIKE '" + 
+                db.CommandText = "SELECT ChengYu FROM ChengYu WHERE ChengYu LIKE '" +
                     txtQuestion.Text.Substring(txtQuestion.Text.Length - 1, 1) + "%'";
                 db.ExecuteReader();
                 if (db.Reader.Read())
@@ -197,12 +194,17 @@ namespace Demo
                 }
                 else
                 {
-                    txtDebug.Text = "Not Found!";
+                    txtDebug.Text = "找不到了";
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("连接本地MDB数据库发生错误：" + ex.ToString(), "错误！");
+                MessageBox.Show("Debug Function Exception!");
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                db.CloseConntion();
             }
         }
     }

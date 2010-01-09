@@ -5,10 +5,11 @@
     Title="Voice Idioms Chaining Game @ BJTU Speech Group 2009" 
     Height="600" Width="800" 
     WindowStartupLocation="CenterScreen" 
-    Source = "GameMain.xaml" 
+    Source = "Menu.xaml" 
     ResizeMode="NoResize" 
     ShowsNavigationUI="False"
     Background="GhostWhite" 
     WindowStyle="SingleBorderWindow"
-    Icon="/SPG;component/Resources/Game.ico">
+    Icon="/SPG;component/Resources/Game.ico"
+    Navigating="NavigationWindow_Navigating">
 </NavigationWindow>

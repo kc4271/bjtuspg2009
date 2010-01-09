@@ -7,14 +7,13 @@
     Title="Idioms Chaining"
     Height="560" Width="800" Loaded="Page_Loaded" mc:Ignorable="d">
     <Canvas>
-        <TextBlock Style="{DynamicResource TitleCenter-Sketch}"  Height="50" Width="300" Text="Idioms Chaining" Canvas.Left="250" Canvas.Top="80" />
-        
+        <TextBlock Style="{DynamicResource TitleCenter-Sketch}"  Height="50" Width="300" Text="宠物成语接龙" Canvas.Left="250" Canvas.Top="80" FontWeight="Heavy" />
         <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}"  Height="50" Width="160" FontSize="35" Text="Welcome " Canvas.Left="80" Canvas.Top="180" />
         <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}"  Height="50" Width="160" FontSize="35" Canvas.Left="273.999" Canvas.Top="178"  Name="textUsrname" />
 		<TextBlock Style="{DynamicResource BasicTextBlock-Sketch}"  Height="30" Width="160" FontSize="17" Text="Demo Version 0.3" Canvas.Left="650" Canvas.Top="530" />
         
-        <Button Style="{DynamicResource Button-Sketch}" Name="btnStart" Height="50" Width="200" Click="btnStart_Click" FontSize="32" Content="Game Start" Canvas.Left="300" Canvas.Top="264" ToolTip="继续上次的游戏进度" />
-        <Button Style="{DynamicResource Button-Sketch}" Name="btnLoad"  Height="50" Width="200" Click="btnLoad_Click"  FontSize="32" Content="Load Game"  Canvas.Left="300" Canvas.Top="342" ToolTip="加载从前的游戏进度" />
-        <Button Style="{DynamicResource Button-Sketch}" Name="btnExit"  Height="50" Width="200" Click="btnExit_Click"  FontSize="32" Content="Exit Game"  Canvas.Left="300" Canvas.Top="422" ToolTip="退出游戏"           />	
+        <Button Style="{DynamicResource Button-Sketch}" Name="btnStart" Height="50" Width="200" Click="btnStart_Click" FontSize="32" Content="开始游戏" Canvas.Left="300" Canvas.Top="264" ToolTip="继续上次的游戏进度" />
+        <Button Style="{DynamicResource Button-Sketch}" Name="btnLoad"  Height="50" Width="200" Click="btnLoad_Click"  FontSize="32" Content="加载游戏"  Canvas.Left="300" Canvas.Top="342" ToolTip="加载从前的游戏进度" />
+        <Button Style="{DynamicResource Button-Sketch}" Name="btnExit"  Height="50" Width="200" Click="btnExit_Click"  FontSize="32" Content="退出游戏"  Canvas.Left="300" Canvas.Top="422" ToolTip="退出游戏"           />	
     </Canvas>
 </Page>
