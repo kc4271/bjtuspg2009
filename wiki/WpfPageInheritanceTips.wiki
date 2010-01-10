@@ -1,0 +1,13 @@
+#summary One-sentence summary of this page.
+
+= WPF页面继承要点 =
+
+以下主要为编写WPF可继承Page的注意事项。
+
+= Details =
+ * 基页面必须全用*CS* 代码方式实现，不能用*XAML* 编写
+
+ * 继承页的根属性用 *命名空间关键字：类名* 的方式编写，命名空间关键字要明确指定为哪个命名空间,如
+
+ <*game:GamePage* xmlns:game="clr-namespace:Demo">
+ </*game:GamePage*>
