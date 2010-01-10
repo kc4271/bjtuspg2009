@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{C8855B15-A9DF-4AE5-BA40-EF77D07439CF}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -116,14 +116,14 @@
     <Compile Include="GameMain.xaml.cs">
       <DependentUpon>GameMain.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Global\DBControl.cs" />
-    <Compile Include="Global\Super.cs" />
+    <Compile Include="GamePage.cs" />
     <Compile Include="LoadGame.xaml.cs">
       <DependentUpon>LoadGame.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MapInf.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -149,7 +149,7 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="App.config" />
-    <Resource Include="Fonts\YY.ttf" />
+    <Resource Include="Resources\Fonts\YY.ttf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -198,7 +198,9 @@
     <Resource Include="Resources\Game.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Background\Map.png" />
+    <EmbeddedResource Include="Resources\Background\Map.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Animal\Doggy.png">
@@ -206,22 +208,31 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Background\Box.png" />
+    <EmbeddedResource Include="Resources\Background\Box.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Background\Arrow.png" />
+    <EmbeddedResource Include="Resources\Background\Arrow.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Background\Box0.png" />
+    <EmbeddedResource Include="Resources\Background\Box0.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Animal\Stand0.png" />
     <Resource Include="Resources\Animal\Stand1.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Background\Arrow1.png">
-    </Resource>
-    <Resource Include="Resources\Background\Home.png" />
+    <EmbeddedResource Include="Resources\Background\Arrow1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Background\Home.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="Profile\Profile.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -1,9 +1,9 @@
-﻿<Page x:Class="Demo.Adventure"
+﻿<game:GamePage x:Class="Demo.Adventure"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:game="clr-namespace:Demo"
     Title="Adventure" Height="560" Width="800" Loaded="Page_Loaded">
-    <Canvas x:Name="Carrier" MouseLeftButtonDown="Carrier_MouseLeftButtonDown">
-        <TextBlock Canvas.Left="90.018" Canvas.Top="40.008" Height="21.671" Name="textBlock1" Width="120.024" />
-        <TextBlock Canvas.Left="605.121" Canvas.Top="40.008" Height="21.671" Name="textBlock2" Width="120.024" />
+    <Canvas x:Name="CurrentCarrier">
+        
     </Canvas>
-</Page>
+</game:GamePage>

@@ -3,27 +3,32 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="Shopping" Height="560" Width="800" Loaded="Page_Loaded">
     <Canvas>
+        <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Height="50" Width="705.015" Name="txtWelcome" FontSize="35" Canvas.Left="52" Canvas.Top="38" />
         <Button Style="{DynamicResource Button-Sketch}" VerticalAlignment="Bottom" Height="50" Name="btnBuy" Content="购买" Click="btnBuy_Click" HorizontalAlignment="Left" Width="150.03" FontSize="28" Canvas.Left="360.072" Canvas.Top="461.759" />
         <Button Style="{DynamicResource Button-Sketch}" VerticalAlignment="Bottom" Height="50" Name="btnCancel" Content="取消" Click="btnCancel_Click" HorizontalAlignment="Right" Width="150.03" FontSize="28" Canvas.Left="608.455" Canvas.Top="461.769" />
-        <StackPanel Canvas.Left="100" Canvas.Top="100" Height="50" Name="stackPanel1" Width="626.604" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel Canvas.Left="52" Canvas.Top="118" Height="50" Name="stackPanel1" Width="706.485" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Height="50" Width="75.015" Text="购买" FontSize="35"/>
             <ComboBox Style="{DynamicResource ComboBox-Sketch}" Height="40.009" Name="comboBox1" Width="100" IsEditable="False" SelectedIndex="0" FontSize="30" DropDownClosed="comboBox_DropDownClosed">
+                <ComboBoxItem>0</ComboBoxItem>
                 <ComboBoxItem>1</ComboBoxItem>
                 <ComboBoxItem>5</ComboBoxItem>
                 <ComboBoxItem>10</ComboBoxItem>
             </ComboBox>
-            <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Height="50" Width="400" Text="个物品1,单价50金币" FontSize="35"/>
+            <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Height="50" Width="334" Text="个物品1,单价50金币" FontSize="35"/>
+            <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Name="txtItem1" Height="50" Width="196" FontSize="35"/>
         </StackPanel>
-        <StackPanel Canvas.Left="100" Canvas.Top="200" Height="50" Name="stackPanel2" Width="626.604" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <StackPanel Canvas.Left="52" Canvas.Top="218" Height="50" Name="stackPanel2" Width="706.485" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
             <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Height="50" Width="75.015" Text="购买" FontSize="35"/>
             <ComboBox Style="{DynamicResource ComboBox-Sketch}" Height="40.009" Name="comboBox2" Width="100" IsEditable="False" SelectedIndex="0" FontSize="30" DropDownClosed="comboBox_DropDownClosed">
+                <ComboBoxItem>0</ComboBoxItem>
                 <ComboBoxItem>1</ComboBoxItem>
                 <ComboBoxItem>5</ComboBoxItem>
                 <ComboBoxItem>10</ComboBoxItem>
             </ComboBox>
-            <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Height="50" Width="400" Text="个物品2,单价100金币" FontSize="35"/>
+            <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Height="50" Width="342" Text="个物品2,单价100金币" FontSize="35"/>
+            <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Name="txtItem2" Height="50" Width="196" FontSize="35"/>
         </StackPanel>
-        <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Name="txtPrice" Height="50" Width="328" Text="总价:" FontSize="35" Canvas.Left="100" Canvas.Top="300" />
+        <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Name="txtPrice" Height="50" Width="626.604" Text="总价:" FontSize="35" Canvas.Left="100" Canvas.Top="300" />
         <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Height="50" Width="160" Text="现有金币:" FontSize="35" Canvas.Left="100" Canvas.Top="378" />
         <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Height="50" Width="170" Name="txtGold" FontSize="35" Canvas.Left="258" Canvas.Top="378" />
         <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Height="50" Width="160" Text="剩余金币:" FontSize="35" Canvas.Left="438" Canvas.Top="378" />

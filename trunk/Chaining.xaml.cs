@@ -12,8 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data;
 using System.Data.OleDb;
-
-using Demo.Global;
+using System.Configuration;
 
 namespace Demo
 {
@@ -27,35 +26,49 @@ namespace Demo
         private int iPass;
         private int iWinScore;
 
+        OleDbConnection conn = new OleDbConnection();   // 创建数据库连接对象
+
+        /// <summary>
+        /// 页面载入初始化, 初始化当前得分,pass次数,胜利分数,提示文字,数据库连接,随机产生一个成语
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            LoadIdioms();
             iScore = 0;     // 当前得分
-            iPass = 10;     // Pass次数
+            iPass = 100;     // Pass次数
             iWinScore = 10;  // 赢得本局需要的得分
+
             txtScore.Text = "分数:" + iScore.ToString();
             txtPassLeft.Text = "剩余 " + iPass.ToString() + " 次机会";
+
+            conn.ConnectionString = ConfigurationManager.ConnectionStrings["dbConnectionString"].ConnectionString;
+            conn.Open();
+
+            LoadIdioms();
         }
 
+        /// <summary>
+        /// 随机产生一个成语
+        /// </summary>
         private void LoadIdioms()
         {
             int iRandom;
             while (true)
             {
-                iRandom = ro.Next(13000);
+                iRandom = ro.Next(13000);   // 数据库记录数
                 if (iRandom > 0)
                     break;
             }
-            DBControl db = new DBControl();
             try
             {
-                db.CommandText = "SELECT ChengYu FROM ChengYu WHERE id = @id";
-                db.AddParameter("id", iRandom);
-                db.ExecuteReader();
-                while (db.Reader.Read())
+                OleDbCommand cmd = new OleDbCommand("SELECT ChengYu FROM ChengYu WHERE id = @id", conn);
+                cmd.Parameters.AddWithValue("id", iRandom);
+               
+                OleDbDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
                 {
-                    txtQuestion.Text = db.Reader[0].ToString();
-                    break;
+                    txtQuestion.Text = reader[0].ToString();
                 }
             }
             catch (Exception ex)
@@ -63,22 +76,21 @@ namespace Demo
                 MessageBox.Show("LoadIdioms Function Exception!");
                 MessageBox.Show(ex.ToString());
             }
-            finally
-            {
-                db.CloseConntion();
-            }
         }
 
+        /// <summary>
+        /// 随机产生以sLastCharacter开头的成语
+        /// </summary>
+        /// <param name="sLastCharacter">成语首字</param>
         private void LoadIdioms(String sLastCharacter)
         {
-            DBControl db = new DBControl();
             try
             {
                 DataSet ds = new DataSet();
-                OleDbDataAdapter a = new OleDbDataAdapter("SELECT ChengYu FROM ChengYu WHERE ChengYu LIKE '" + sLastCharacter + "%'", db.Connection);
-                a.Fill(ds);
-                int rs = ds.Tables[0].Rows.Count;
+                OleDbDataAdapter adapter = new OleDbDataAdapter("SELECT ChengYu FROM ChengYu WHERE ChengYu LIKE '" + sLastCharacter + "%'", conn);
+                adapter.Fill(ds);
 
+                int rs = ds.Tables[0].Rows.Count;   // 以sLastCharacter开头的成语的个数
                 if (rs > 0)
                 {
                     txtQuestion.Text = ds.Tables[0].Rows[ro.Next(rs)].ItemArray[0].ToString();
@@ -88,7 +100,6 @@ namespace Demo
                     txtStatus.Text = "没有以\"" + sLastCharacter + "\"开头的成语,加一次Pass机会";
                     iPass++;
                     txtPassLeft.Text = "剩余 " + iPass.ToString() + " 次机会";
-                    db.CloseConntion();
                     LoadIdioms();
                 }
             }
@@ -97,33 +108,31 @@ namespace Demo
                 MessageBox.Show("LoadIdioms(string) Function Exception!");
                 MessageBox.Show(ex.ToString());
             }
-            finally
-            {
-                db.CloseConntion();
-            }
         }
 
-
+        /// <summary>
+        /// 确认后判定所输入单词是否合法,是否为所要求的成语
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            txtDebug.Text = "";
+            txtDebug.Text = ""; // 清空提示框
 
             if (txtAnswer.Text == "" || txtAnswer.Text.Substring(0, 1) != txtQuestion.Text.Substring(txtQuestion.Text.Length - 1, 1))
             {
                 txtStatus.Text = "错误!";
                 return;
             }
-
-            DBControl db = new DBControl();
             try
             {
-                db.CommandText = "SELECT ChengYu FROM ChengYu WHERE ChengYu = @ChengYu";
-                db.AddParameter("id", txtAnswer.Text);
-                db.ExecuteReader();
-                if (db.Reader.Read())
+                OleDbCommand cmd = new OleDbCommand("SELECT ChengYu FROM ChengYu WHERE ChengYu = @ChengYu", conn);
+                cmd.Parameters.AddWithValue("id", txtAnswer.Text);
+                
+                OleDbDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
                 {
                     txtStatus.Text = "回答正确,加1分!";
-                    // 分数操作
                     iScore++;
                     txtScore.Text = "分数:" + iScore.ToString();
                     if (iScore >= iWinScore)
@@ -133,7 +142,6 @@ namespace Demo
                     }
                     else
                     {
-                        db.CloseConntion();
                         LoadIdioms(txtAnswer.Text.Substring(txtAnswer.Text.Length - 1, 1));
                     }
                 }
@@ -147,12 +155,13 @@ namespace Demo
                 MessageBox.Show("Submit Function Exception!");
                 MessageBox.Show(ex.ToString());
             }
-            finally
-            {
-                db.CloseConntion();
-            }
         }
 
+        /// <summary>
+        /// Pass,给出答案并继续游戏,若无答案,重新生成
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnPass_Click(object sender, RoutedEventArgs e)
         {
             if (iPass > 0)
@@ -169,30 +178,35 @@ namespace Demo
             }
         }
 
+        /// <summary>
+        /// 道具1,增加一次pass机会
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnItem1_Click(object sender, RoutedEventArgs e)
         {
             iPass++;
             txtPassLeft.Text = "剩余 " + iPass.ToString() + " 次机会";
+            txtStatus.Text = "增加一次Pass机会";
         }
 
-        private void btnBack_Click(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new Uri("Adventure.xaml", UriKind.Relative));
-        }
-
+        /// <summary>
+        /// 道具2,提示答案
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnItem2_Click(object sender, RoutedEventArgs e)
         {
             iScore--;
             txtScore.Text = "分数:" + iScore.ToString();
-            DBControl db = new DBControl();
+
             try
             {
                 DataSet ds = new DataSet();
-                OleDbDataAdapter a = new OleDbDataAdapter("SELECT ChengYu FROM ChengYu WHERE ChengYu LIKE '" +
-                    txtQuestion.Text.Substring(txtQuestion.Text.Length - 1, 1) + "%'", db.Connection);
-                a.Fill(ds);
+                OleDbDataAdapter adapter = new OleDbDataAdapter("SELECT ChengYu FROM ChengYu WHERE ChengYu LIKE '" +
+                    txtQuestion.Text.Substring(txtQuestion.Text.Length - 1, 1) + "%'", conn);
+                adapter.Fill(ds);
                 int rs = ds.Tables[0].Rows.Count;
-
                 if (rs > 0)
                 {
                     txtDebug.Text = ds.Tables[0].Rows[ro.Next(rs)].ItemArray[0].ToString();
@@ -207,10 +221,26 @@ namespace Demo
                 MessageBox.Show("Item2 Function Exception!");
                 MessageBox.Show(ex.ToString());
             }
-            finally
-            {
-                db.CloseConntion();
-            }
+        }
+
+        /// <summary>
+        /// 返回
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            this.NavigationService.Navigate(new Uri("Adventure.xaml", UriKind.Relative));
+        }
+
+        /// <summary>
+        /// 卸载页面,关闭数据库连接
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Page_Unloaded(object sender, RoutedEventArgs e)
+        {
+            conn.Close();   // 关闭数据库连接
         }
     }
 }
