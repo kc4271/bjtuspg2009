@@ -24,7 +24,7 @@
     <SolidColorBrush x:Key="FocusedBorder-Sketch" Color="#FF000000"/>
     <SolidColorBrush x:Key="DisabledBorder-Sketch" Color="#FF9F9F9F"/>
     <SolidColorBrush x:Key="SelectedBackground-Sketch" Color="#FFAFAFAF"/>
-    <FontFamily x:Key="FontFamily-Sketch">/SPG;Component/Fonts/#汉仪丫丫体简</FontFamily>
+    <FontFamily x:Key="FontFamily-Sketch">/SPG;Component/Resources/Fonts/#汉仪丫丫体简</FontFamily>
     <sys:Double x:Key="SizeDouble-Sketch">19</sys:Double>
     <FontWeight x:Key="FontWeight-Sketch">Heavy</FontWeight>
 

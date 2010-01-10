@@ -11,6 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+
+
 namespace Demo
 {
     /// <summary>
@@ -25,11 +27,31 @@ namespace Demo
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             comboBox_DropDownClosed(sender, e);
+         /*
+            txtWelcome.Text = "你好," + Profile.currentUser.username + ",欢迎来到本商店";
+            txtGold.Text = Profile.currentUser.usergold.ToString();
+            txtItem1.Text = ",现有" + Profile.currentUser.useritem1.ToString() + "个";
+            txtItem2.Text = ",现有" + Profile.currentUser.useritem2.ToString() + "个";*/
         }
 
         private void btnBuy_Click(object sender, RoutedEventArgs e)
         {
-            // 
+            /*   
+            // 购买 物品数加 金币数减
+            if (int.Parse(txtLeft.Text) >= 0)
+            {
+                
+                Profile.currentUser.usergold = int.Parse(txtLeft.Text);
+                Profile.currentUser.useritem1 += int.Parse(comboBox1.Text);
+                Profile.currentUser.useritem2 += int.Parse(comboBox2.Text);
+                 
+            }
+            else
+            {
+                txtPrice.Text = "您的剩余金币不足以完成本次支付,请检查.";
+                return;
+            }
+             * */
             this.NavigationService.Navigate(new Uri("GameMain.xaml", UriKind.Relative));
         }
 
@@ -42,6 +64,7 @@ namespace Demo
         {
             TotalPrice = int.Parse(comboBox1.Text) * Item1Price + int.Parse(comboBox2.Text) * Item2Price;
             txtPrice.Text = "总价:" + TotalPrice.ToString();
+            //txtLeft.Text = (Profile.currentUser.usergold - TotalPrice).ToString();
         }
     }
 }

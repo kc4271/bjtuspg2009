@@ -22,6 +22,7 @@ namespace Demo
             FileInfo fi = new FileInfo("userinfo.xml");
             if (!fi.Exists)
                 ConfigClass.UserInfoGenerater();
+            
         }
 
         public static class ConfigClass

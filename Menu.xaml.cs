@@ -24,9 +24,7 @@ namespace Demo
     {
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            string tmp1, tmp2;
-            App.ConfigClass.ReadConfig(out tmp1,out tmp2);
-            textUsrname.Text = tmp1;
+            //textUsrname.Text = Profile.currentUser.username;
         }
 
         private void btnStart_Click(object sender, RoutedEventArgs e)

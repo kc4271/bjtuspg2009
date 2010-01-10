@@ -21,8 +21,11 @@ namespace Demo
     {
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
-            // save setting and start game
+            /*
             App.ConfigClass.SaveConfig("sUserName", this.txtUsername.Text);
+            */
+            //Profile.CreateNewProfile(txtUsername.Text);
+
 
             this.NavigationService.Navigate(new Uri("GameMain.xaml", UriKind.Relative));
         }

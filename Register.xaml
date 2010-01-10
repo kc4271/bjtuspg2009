@@ -3,13 +3,15 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="Register" Height="560" Width="800" >
     <Canvas>
-        <TextBlock Margin="93.31,50,102.511,0" Style="{DynamicResource TitleCenter-Sketch}" VerticalAlignment="Top" Height="46" Text="Choose Your Pet and Your Name"/>
-        <TextBlock HorizontalAlignment="Left" Margin="57.5,177.5,0,0" Style="{DynamicResource BodyCenter-Sketch}" VerticalAlignment="Top" Height="50" Width="252.5" FontSize="32">Choose Your Pet:</TextBlock>
-        <TextBlock HorizontalAlignment="Right" Margin="0,177.5,131.007,0" Style="{DynamicResource BodyCenter-Sketch}" VerticalAlignment="Top" Height="50" Width="252.5" FontSize="32" Canvas.Left="373.408" Canvas.Top="0">Type Your Name:</TextBlock>
-        <TextBox Margin="0,0,103.507,266" Style="{DynamicResource BasicTextBox-Sketch}" TextWrapping="Wrap" HorizontalAlignment="Right" Width="280.056" FontSize="45" Name="txtUsername" Height="52" VerticalAlignment="Bottom" Canvas.Left="373.408" Canvas.Top="258.5" />
-        <Button HorizontalAlignment="Right" Margin="0,0,103.507,162" Style="{DynamicResource Button-Sketch}" Name="btnConfirm" Width="200" FontSize="32" Height="50" VerticalAlignment="Bottom" Click="btnConfirm_Click" Canvas.Left="320.064" Canvas.Top="470">Confirm</Button>
-        <Button HorizontalAlignment="Right" Margin="0,0,103.507,96" Style="{DynamicResource Button-Sketch}" Name="btnCancel" Width="200" FontSize="32" Height="50" VerticalAlignment="Bottom" Click="btnCancel_Click" Canvas.Left="546.776" Canvas.Top="470">Cancel</Button>
-        <RadioButton HorizontalAlignment="Left" Margin="110,264,0,248" Style="{DynamicResource RadioButton-Sketch}" Content="Tom" Width="200" FontSize="40"/>
-        <RadioButton FontSize="40" HorizontalAlignment="Left" Margin="110,0,0,168" Style="{DynamicResource RadioButton-Sketch}" Width="200" Height="50.01" VerticalAlignment="Bottom" Canvas.Left="0" Canvas.Top="336.734">Jerry</RadioButton>
+        <TextBlock Style="{DynamicResource TitleCenter-Sketch}" Height="46.676" Width="200" Canvas.Left="300" Canvas.Top="51.677" Text="创建新档案"  />
+        <TextBlock Style="{DynamicResource BodyCenter-Sketch}" Height="50.01" Width="185.037" FontSize="32" Canvas.Left="100" Canvas.Top="158.365">请选择宠物:</TextBlock>
+        <TextBlock Style="{DynamicResource BodyCenter-Sketch}" Height="50.01" Width="148.363" FontSize="32" Canvas.Left="440" Canvas.Top="158.365">输入名字:</TextBlock>
+        <TextBox Style="{DynamicResource BasicTextBox-Sketch}" TextWrapping="NoWrap" Height="52"  Width="280.056" FontSize="45" Canvas.Left="440.088" Canvas.Top="244.5" Name="txtUsername" />
+        <Button Style="{DynamicResource Button-Sketch}" Name="btnConfirm" Width="200" FontSize="32" Height="50" Click="btnConfirm_Click" Canvas.Left="300" Canvas.Top="470">确定</Button>
+        <Button Style="{DynamicResource Button-Sketch}" Name="btnCancel" Width="200" FontSize="32" Height="50" Click="btnCancel_Click" Canvas.Left="550" Canvas.Top="470">取消</Button>
+        
+        <RadioButton Style="{DynamicResource RadioButton-Sketch}" Content="Tom" Height="50" Width="200" FontSize="40" Canvas.Left="100" Canvas.Top="250"/>
+        <RadioButton Style="{DynamicResource RadioButton-Sketch}" Content="Jerry" Height="50"  Width="200" FontSize="40"  Canvas.Left="100" Canvas.Top="320" />
+    
     </Canvas>
 </Page>
