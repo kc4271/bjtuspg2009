@@ -1,5 +1,7 @@
 = To Do List =
 
+== First Stage==
+
   * ~~动画元素的实现~~ *DONE*
 
   * ~~Adventure页面基本功能~~ *DONE*
@@ -27,6 +29,19 @@
   * 继续扩展动画基类的功能,增加功能,提高易用性和健壮性
  
   * 提高ImageCut函数的效率
+
+  * 考虑留出适当的语音接口
+
+
+== Second Stage==
+
+  * 对加了pitch的HTK进行测试,生成修改后HTK的性能和准确度测试报告
+
+  * 完成对HTK的DLL封装
+
+  * 把DLL形式的HTK整合进成语接龙游戏中
+
+== Third Stage==
 
   * 分解整理搜集处理图片资源
 
