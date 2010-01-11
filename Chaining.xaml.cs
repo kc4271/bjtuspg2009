@@ -36,11 +36,12 @@ namespace Demo
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             iScore = 0;     // 当前得分
-            iPass = 100;     // Pass次数
-            iWinScore = 10;  // 赢得本局需要的得分
+            iPass = 10;     // Pass次数
+            iWinScore = 5;  // 赢得本局需要的得分
 
             txtScore.Text = "分数:" + iScore.ToString();
             txtPassLeft.Text = "剩余 " + iPass.ToString() + " 次机会";
+            MessageBox.Show("打开本宝箱需要回答对" + iWinScore.ToString() + "个问题,你有" + iPass.ToString() + "次Pass的机会,加油哦~");
 
             conn.ConnectionString = ConfigurationManager.ConnectionStrings["dbConnectionString"].ConnectionString;
             conn.Open();
@@ -137,7 +138,8 @@ namespace Demo
                     txtScore.Text = "分数:" + iScore.ToString();
                     if (iScore >= iWinScore)
                     {
-                        MessageBox.Show("恭喜你顺利打开宝箱!");
+                        MessageBox.Show("恭喜你顺利打开宝箱,获得" + (iWinScore * 100).ToString() + "金币!");
+                        App.CurrentUser.gold += iWinScore * 100;
                         this.NavigationService.Navigate(new Uri("Adventure.xaml", UriKind.Relative));
                     }
                     else
@@ -174,7 +176,7 @@ namespace Demo
             else
             {
                 MessageBox.Show("对不起,已经没有Pass机会了.");
-                this.NavigationService.Navigate(new Uri("Adventure.xaml", UriKind.Relative));
+                //this.NavigationService.Navigate(new Uri("Adventure.xaml", UriKind.Relative));
             }
         }
 
@@ -185,9 +187,17 @@ namespace Demo
         /// <param name="e"></param>
         private void btnItem1_Click(object sender, RoutedEventArgs e)
         {
-            iPass++;
-            txtPassLeft.Text = "剩余 " + iPass.ToString() + " 次机会";
-            txtStatus.Text = "增加一次Pass机会";
+            if (App.CurrentUser.item1 > 0)
+            {
+                App.CurrentUser.item1--;
+                iPass++;
+                txtPassLeft.Text = "剩余 " + iPass.ToString() + " 次机会";
+                txtStatus.Text = "增加一次Pass机会";
+            }
+            else
+            {
+                MessageBox.Show("道具1不足,请到商店购买.");
+            }
         }
 
         /// <summary>
@@ -197,30 +207,41 @@ namespace Demo
         /// <param name="e"></param>
         private void btnItem2_Click(object sender, RoutedEventArgs e)
         {
-            iScore--;
-            txtScore.Text = "分数:" + iScore.ToString();
+            if (App.CurrentUser.item2 > 0)
+            {
+                App.CurrentUser.item2--;    // 道具数量减一
 
-            try
-            {
-                DataSet ds = new DataSet();
-                OleDbDataAdapter adapter = new OleDbDataAdapter("SELECT ChengYu FROM ChengYu WHERE ChengYu LIKE '" +
-                    txtQuestion.Text.Substring(txtQuestion.Text.Length - 1, 1) + "%'", conn);
-                adapter.Fill(ds);
-                int rs = ds.Tables[0].Rows.Count;
-                if (rs > 0)
+                // 更新分数显示
+                iScore--;
+                txtScore.Text = "分数:" + iScore.ToString();
+
+                try
                 {
-                    txtDebug.Text = ds.Tables[0].Rows[ro.Next(rs)].ItemArray[0].ToString();
+                    DataSet ds = new DataSet();
+                    OleDbDataAdapter adapter = new OleDbDataAdapter("SELECT ChengYu FROM ChengYu WHERE ChengYu LIKE '" +
+                        txtQuestion.Text.Substring(txtQuestion.Text.Length - 1, 1) + "%'", conn);
+                    adapter.Fill(ds);
+                    int rs = ds.Tables[0].Rows.Count;
+                    if (rs > 0)
+                    {
+                        txtDebug.Text = ds.Tables[0].Rows[ro.Next(rs)].ItemArray[0].ToString();
+                    }
+                    else
+                    {
+                        txtDebug.Text = "这个我也不会...";
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    txtDebug.Text = "这个我也不会...";
+                    MessageBox.Show("Item2 Function Exception!");
+                    MessageBox.Show(ex.ToString());
                 }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show("Item2 Function Exception!");
-                MessageBox.Show(ex.ToString());
+                MessageBox.Show("道具2不足,请到商店购买.");
             }
+
         }
 
         /// <summary>

@@ -1,19 +1,13 @@
 ﻿<Page x:Class="Demo.LoadGame"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    Title="LoadGame" Height="560" Width="800">
-    <Page.Resources>
-        <XmlDataProvider x:Key="userSource" Source="Profile/Profile.xml" XPath="/Profile/*" />
-        <DataTemplate x:Key="showName">
-            <TextBlock Text="{Binding XPath=Name}" />
-        </DataTemplate>
-    </Page.Resources>
+    Title="LoadGame" Height="560" Width="800" Loaded="Page_Loaded">
     <Canvas>
         <TextBlock Style="{DynamicResource TitleCenter-Sketch}" Height="50"  Width="400" Canvas.Left="200" Canvas.Top="50" Text="选择您的存档"/>
         <Button Style="{DynamicResource Button-Sketch}" Height="50" Width="150"  Canvas.Left="50" Canvas.Top="470" Name="btnBack" Content="返回" Click="btnBack_Click" FontSize="28" IsEnabled="True" />
-        <Button Style="{DynamicResource Button-Sketch}" Height="50" Width="150"  Canvas.Left="600" Canvas.Top="470" Name="btnConfirm" Content="继续游戏" Click="btnAdventure_Click" FontSize="28" IsEnabled="True" />
-        <Button Style="{DynamicResource Button-Sketch}" Height="50" Width="150"  Canvas.Left="400" Canvas.Top="470" Name="btnDelete" Content="删除存档" Click="btnDelete_Click"  FontSize="28" IsEnabled="True" />
-        <ListBox Style="{DynamicResource ListBox-Sketch}" Width="500" Canvas.Left="150" Canvas.Top="150" Height="250" Name="listBox1"  HorizontalContentAlignment="Center"
-                 ItemsSource="{Binding Source={StaticResource userSource}}" ItemTemplate="{StaticResource showName}" IsSynchronizedWithCurrentItem="True" />
+        <Button Style="{DynamicResource Button-Sketch}" Height="50" Width="150"  Canvas.Left="228" Canvas.Top="470" Name="btnNew" Content="新建档案" Click="btnNew_Click" FontSize="28" IsEnabled="True" />
+        <Button Style="{DynamicResource Button-Sketch}" Height="50" Width="150"  Canvas.Left="600" Canvas.Top="470" Name="btnConfirm" Content="继续游戏" Click="btnAdventure_Click" FontSize="28" IsEnabled="False" />
+        <Button Style="{DynamicResource Button-Sketch}" Height="50" Width="150"  Canvas.Left="418" Canvas.Top="470" Name="btnDelete" Content="删除存档" Click="btnDelete_Click"  FontSize="28" IsEnabled="False" />
+        <ListBox Style="{DynamicResource ListBox-Sketch}" Width="500" Canvas.Left="150" Canvas.Top="150" Height="250" Name="listBox1"  HorizontalContentAlignment="Center" SelectedIndex="0" SelectionChanged="listBox1_SelectionChanged" />
     </Canvas>
 </Page>

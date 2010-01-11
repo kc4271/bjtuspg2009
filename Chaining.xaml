@@ -11,7 +11,7 @@
         <Button Style="{DynamicResource Button-Sketch}" Name="btnSubmit" Height="50.01" Width="116.69" Click="btnSubmit_Click" FontSize="32" Content="确认" Canvas.Left="258.385" Canvas.Top="153.364" />
         <Button Canvas.Left="645.129" Canvas.Top="155.041" FontSize="32" Height="50" Name="btnPass" Style="{DynamicResource Button-Sketch}" Width="118.357" Click="btnPass_Click">PASS</Button>
         <TextBlock Canvas.Left="0" Canvas.Top="529.994" FontSize="25" Height="30.006" Style="{DynamicResource BodyCenter-Sketch}" Name="txtDebug" Width="800" />
-        <Image Canvas.Left="182.716" Canvas.Top="301.727" Height="63.346" Name="image1" Stretch="Fill" Width="64" Source="/SPG;component/Resources/Animal/Stand1.png" /><Image Canvas.Left="605.121" Canvas.Top="285.057" Height="96.686" Name="image2" Stretch="Fill" Width="96.686" Source="/SPG;component/Resources/Background/Box.png" />
+        <Image Canvas.Left="182.716" Canvas.Top="301.727" Height="63.346" Name="image1" Stretch="Fill" Width="64" Source="/SPG;component/Resources/Animal/Stand1.png" />
         <Button Style="{DynamicResource Button-Sketch}" Name="btnItem1" Height="50.01" Width="150.03" FontSize="32" Content="道具1" Canvas.Left="50" Canvas.Top="443.422" Click="btnItem1_Click" ToolTip="增加一次Pass机会"/>
         <Button Style="{DynamicResource Button-Sketch}" Name="btnItem2" Height="50.01" Width="150.03" FontSize="32" Content="道具2" Canvas.Left="225" Canvas.Top="443.422" Click="btnItem2_Click"  ToolTip="减一分换取一次提示"/>
         <Button Style="{DynamicResource Button-Sketch}" Name="btnBack" Height="50.01" Width="100" Click="btnBack_Click"  FontSize="32" Content="放弃" Canvas.Left="663.486" Canvas.Top="443.422" />

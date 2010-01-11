@@ -7,93 +7,65 @@ using System.Windows;
 using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
+using System.Xml.Linq;
 
 namespace Demo
 {
     /// <summary>
     /// App.xaml 的交互逻辑
     /// </summary>
+    /// 
     public partial class App : Application
     {
+        // 创建全局变量
+        public static User CurrentUser = new User();
+        public static XmlOperator Profile;
+
         public App()
         {
-            InitializeComponent();
-            
-            FileInfo fi = new FileInfo("userinfo.xml");
+            // 检查Profile目录
+            DirectoryInfo di = new DirectoryInfo("Profile");
+            if (!di.Exists)
+                Directory.CreateDirectory("Profile");
+
+            // 检查Profile文件
+            FileInfo fi = new FileInfo("Profile/Profile.xml");
             if (!fi.Exists)
-                ConfigClass.UserInfoGenerater();
-            
+                ProfileXMLGenerater();
+
+
+            GuestXMLGenerater();
+
+            Profile = new XmlOperator();
         }
 
-        public static class ConfigClass
+        public void GuestXMLGenerater()
         {
-            public static string strFileName;
-            public static string configName;
-            public static string configValue;
-
-            public static void ReadConfig(out string username, out string money)
-            {
-                username = "";
-                money = "";
-                XmlTextReader xmlTextReader = new XmlTextReader(@"userinfo.xml");
-                xmlTextReader.WhitespaceHandling = WhitespaceHandling.None;
-                while (xmlTextReader.Read())
-                {
-                    if (xmlTextReader.Name == "CUserInfo")
-                    {
-                        xmlTextReader.Read();
-                        username = xmlTextReader.ReadElementContentAsString();
-                        //xmlTextReader.Read();
-                        money = xmlTextReader.ReadElementContentAsString();
-                        break;
-                    }
-                }
-                xmlTextReader.Close();
-            }
-
-            public static void SaveConfig(string configKey, string configValue)
-            {
-                XmlDocument doc = new XmlDocument();
-                string strFileName = AppDomain.CurrentDomain.BaseDirectory.ToString() + "userinfo.xml";
-                doc.Load(strFileName);
-                XmlNode rootnode = doc.SelectSingleNode("CUserInfo");
-                if (configValue.Length == 0)
-                    configValue = "username";       
-                rootnode.FirstChild.FirstChild.Value = configValue;
-                doc.Save(strFileName);
-            }
-
-            public static void UserInfoGenerater()
-            {
-                CUserInfo userInfo = new CUserInfo();
-                userInfo.sUserName = "Username";
-                userInfo.nMoney = 888;
-                XmlSerializer serializer = new XmlSerializer(typeof(CUserInfo));
-                using (StreamWriter streamWriter = File.CreateText("userinfo.xml"))
-                {
-                    serializer.Serialize(streamWriter, userInfo);
-                }
-            }
+            XDocument inventoryDoc =
+            new XDocument(
+            new XDeclaration("1.0", "utf-8", "yes"),
+            new XElement("User",
+                new XElement("Name", "Guest"),
+                new XElement("Gold", 0),
+                new XElement("Pet", "0"),
+                new XElement("Item1", 0),
+                new XElement("Item2", 0)
+                )
+            );
+            inventoryDoc.Save("Profile/Guest.xml");
         }
 
-        [Serializable()]
-        public class CUserInfo
+        public void ProfileXMLGenerater()
         {
-            // String field and property
-            private string username;
-            public string sUserName
-            {
-                get { return username; }
-                set { username = value; }
-            }
-
-            // Bool field and property
-            private int Money;
-            public int nMoney
-            {
-                get { return Money; }
-                set { Money = value; }
-            }
+            XDocument inventoryDoc =
+            new XDocument(
+            new XDeclaration("1.0", "utf-8", "yes"),
+            new XElement("Profile",
+                new XElement("Name", "Guest")
+                )
+            );
+            inventoryDoc.Save("Profile/Profile.xml");
         }
+
     }
 }

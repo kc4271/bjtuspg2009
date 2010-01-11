@@ -11,6 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Xml.Linq;
+using System.Xml.XPath;
 
 namespace Demo
 {
@@ -19,57 +21,53 @@ namespace Demo
     /// </summary>
     public partial class GameMain : GamePage
     {
-        bool isMoving = false;
-        int count = 0;
-        int AnimalMoveSpeed = 10;
+        CAnimalControl Animal;
         int LowestLine = 300; //鼠标最低有效范围线
-
-        Image Animal;
-      
         Point MoveTo;
-
-        public enum eDirection
-        {
-            BACK, FORWARD
-        }
-        eDirection dir = eDirection.FORWARD;
-        
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            nPageIndex = COriginalInfo.nGameMainMapInfo;
-            init(CurrentCarrier);
+            // 加载用户信息
+            txtUsername.Text = "HI," + App.CurrentUser.name;
+            txtUsergold.Text = App.CurrentUser.gold.ToString() + "金币";
+
+            // 加载背景
+            Load(CurrentCarrier,COriginalInfo.nGameMainMapInfo);
             BaseCarrier.MouseLeftButtonDown += new MouseButtonEventHandler(this.Carrier_MouseLeftButtonDown);
             
             // 加载宠物
-            Animal = new Image();
-            BaseCarrier.Children.Add(Animal);
-            Canvas.SetTop(Animal, 350);
-            Canvas.SetLeft(Animal, 50);
-            MoveTo.X = 50;
+            Animal = new CAnimalControl();
+            Animal.Load(CurrentCarrier, COriginalInfo.nGameMainMapInfo);
+            MoveTo.X = Animal.AnimalWindowX;
 
-            this.Sprites[1].Sprite.MouseLeftButtonDown += imgArrow1_MouseLeftButtonDown;
-
-            DispatcherTimer dispatcherTimer = new DispatcherTimer();
-            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+             DispatcherTimer dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Tick += new EventHandler(Current_Tick);
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(40);
             dispatcherTimer.Start();
         }
 
-        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        private void Current_Tick(object sender, EventArgs e)
         {
-            if (isMoving)
+            if (Math.Abs(Animal.AnimalWindowX - MoveTo.X) > Animal.AnimalMoveSpeed)
             {
-                Animal.Source = cutImage(@"Resources\Animal\Doggy.png", count, (int)dir, 64, 64);
-                count = (count + 1) % 6;
+                Animal.isMoving = true;
+                if (MoveTo.X <= Animal.AnimalWindowX)
+                    Animal.nDirection = 0;
+                else
+                    Animal.nDirection = 1;
             }
             else
             {
-                Animal.Source = new BitmapImage(
-               (new Uri(@"Resources\Animal\Stand" + (int)dir + ".png",
-                   UriKind.Relative)));
+                Animal.isMoving = false;
             }
-            Move();
+            if (Animal.AnimalWindowX >= 700)
+            {
+                if (this.NavigationService == null)
+                {
+                    return;
+                }
+                this.NavigationService.Navigate(new Uri("Adventure.xaml", UriKind.Relative));
+            }
         }
 
         private void Carrier_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -78,27 +76,8 @@ namespace Demo
             if (pMousePos.Y < LowestLine)
                 return;
             MoveTo = pMousePos;
+            Animal.MoveTo = MoveTo;
         }
-
-        private void Move()
-        {
-            double Animal_X = Canvas.GetLeft(Animal);
-            if (Math.Abs(Animal_X - MoveTo.X) > AnimalMoveSpeed)
-            {
-                isMoving = true;
-                if (MoveTo.X <= Animal_X)
-                    dir = eDirection.BACK;
-                else
-                    dir = eDirection.FORWARD;
-                txtStatus.Text = Animal_X.ToString();
-                Canvas.SetLeft(Animal, Animal_X + (Animal_X < MoveTo.X ? AnimalMoveSpeed : -AnimalMoveSpeed));
-            }
-            else
-            {
-                isMoving = false;
-            }
-        }
-
         private void btnAdventure_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new Uri("Adventure.xaml", UriKind.Relative));
@@ -121,15 +100,31 @@ namespace Demo
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new Uri("menu.xaml", UriKind.Relative));
-            // autosave
-        }
+             // 存档
+            try
+            {
+                App.Profile.SetXmlFile();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("存档异常" + ex.ToString());
+            }
+           
+            // 修改最后登录信息
+            try
+            {
+                XDocument myDoc = XDocument.Load("Profile/Profile.xml");
+                XElement xElement = myDoc.XPathSelectElement("Profile/Name[1]");
+                xElement.SetValue(App.CurrentUser.name.ToString());
+                myDoc.Save("Profile/Profile.xml");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("修改最后登录信息异常" + ex.ToString());
+            }
 
-        private void imgArrow1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (Math.Abs(Canvas.GetLeft(Animal) - MoveTo.X) < AnimalMoveSpeed * 2)
-                this.NavigationService.Navigate(new Uri("Adventure.xaml", UriKind.Relative));
+            // 跳转到Menu
+            this.NavigationService.Navigate(new Uri("Menu.xaml", UriKind.Relative));
         }
-
     }
 }
