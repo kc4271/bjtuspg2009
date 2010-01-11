@@ -4,9 +4,9 @@
       xmlns:game="clr-namespace:Demo"
     Title="GameMain" Height="560" Width="800" Background="GhostWhite" Loaded="Page_Loaded">
     <Canvas x:Name="CurrentCarrier" MouseLeftButtonDown="Carrier_MouseLeftButtonDown">
-        <TextBlock Height="150" Width="150" HorizontalAlignment="Right" Margin="0,50,50,0"  VerticalAlignment="Top" Name="txtUserMoney" Style="{DynamicResource BodyCenter-Sketch}" FontSize="32" Canvas.Left="599.853" Canvas.Top="0" />
-        <TextBlock Height="150" Width="150.03" HorizontalAlignment="Left" Margin="50,50,0,0"  VerticalAlignment="Top" Name="txtUsername" Style="{DynamicResource BodyCenter-Sketch}" FontSize="32" Canvas.Left="0" Canvas.Top="0" />
-        <TextBlock Height="65.013" Width="150.03" Name="txtStatus" Style="{DynamicResource BodyCenter-Sketch}" FontSize="32" Canvas.Left="311.729" Canvas.Top="50" />
+        <TextBlock Height="80.016" Width="310.062" HorizontalAlignment="Right" Margin="0,50,50,0"  VerticalAlignment="Top" Name="txtUsergold" Style="{DynamicResource BodyCenter-Sketch}" FontSize="32" Canvas.Left="440.088" Canvas.Top="0" />
+        <TextBlock Height="80.016" Width="300.06" HorizontalAlignment="Left" Margin="50,50,0,0"  VerticalAlignment="Top" Name="txtUsername" Style="{DynamicResource BodyCenter-Sketch}" FontSize="32" Canvas.Left="0" Canvas.Top="0" />
+        
         <Button Height="50" Width="120" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="48,0,0,50" Name="btnAdventure" Click="btnAdventure_Click" Style="{DynamicResource Button-Sketch}" FontSize="22" Canvas.Left="2" Canvas.Top="470">Adventure</Button>
         <Button Height="50" Width="120.024" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="188,0,0,50" Name="btnFeed" Click="btnFeed_Click" Style="{DynamicResource Button-Sketch}" FontSize="28" Canvas.Left="5.001" Canvas.Top="470">Feed</Button>
         <Button Height="50" VerticalAlignment="Bottom" Margin="328,0,352,50" Name="btnShopping" Click="btnShopping_Click"  Style="{DynamicResource Button-Sketch}" FontSize="22" Canvas.Left="8.335" Canvas.Top="470" Width="110.022">Shopping</Button>

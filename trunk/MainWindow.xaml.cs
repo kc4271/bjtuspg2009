@@ -26,6 +26,7 @@ namespace Demo
         public MainWindow()
         {
             InitializeComponent();
+            App.Profile.GetXmlReader(); //读档
         }
 
         // Fade effects, thanks to Dr.WPF and his FaderFrame.cs
