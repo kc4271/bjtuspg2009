@@ -33,5 +33,4 @@
 
   * VS2008中奇怪问题：要把HTK封装成c#可以调用的DLL，需要设置Property->Configuration Proproties->General->Common Language Runtime support为Common Language Runtime Support(/clr)，这是一般会出现错误cl : Command line error D8045 : cannot compile C file '.\esig_asc.c' with the /clr option，经查阅文档可知/clr选项需要所编译代码为c++形式，所以Property->Configuration Proproties->C/C++->Advanced->Compile As需要设为Compile as C++ Code(/TP)，但VS2008默认此项就是如此，经常是发现只要把此选项改为Default编译一下，遇到同样错误后再把该选项改回来就可以正常编译了。
 
-  *
 = 其他 =
