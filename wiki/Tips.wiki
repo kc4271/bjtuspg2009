@@ -25,8 +25,8 @@
  * 所有编译任务进行之前要注意换行符编码,win下以CR/LF表示换行，而linux的换行符是LF,二者区别请Google.
  
  * HSLab在Win32系统下使用HGraf_WIN32.c编译，不要使用HGraf.null.c和HGraf.c。
- 
 
+ * HTKLib一般被编译成静态库，项目的Property->Configuration Proproties->General->Configuration Type为Static Libraray
 == 封装 ==
 
 
