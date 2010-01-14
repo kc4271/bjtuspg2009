@@ -47,9 +47,9 @@
 
 == Pitch部分 ==
 
-  * 整理Pitch算法,写成完整的函数 *DONE*
+  * ~~整理Pitch算法,写成完整的函数~~ *DONE*
 
-  * 将Pitch加入HTK *DONE*
+  * ~~将Pitch加入HTK~~ *DONE*
 
   * 测试Pitch的正确性,并修改
 
