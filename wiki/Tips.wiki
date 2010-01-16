@@ -2,7 +2,7 @@
 
 = Tips = 
 
- * x64平台下的编译选项要选择Any CPU *x86*
+ * x64平台下的编译选项要选择Any CPU *x86* (.Net平台使用非托管的DLL时会抛出BadImageFormatException异常)
 
 = WPF部分 =
 
