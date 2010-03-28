@@ -20,7 +20,7 @@ namespace Demo
         // 创建全局变量
         public static User CurrentUser = new User();
         public static XmlOperator Profile;
-
+        public static SPEECH_API SA;
         public App()
         {
             // 检查Profile目录
@@ -37,6 +37,15 @@ namespace Demo
             GuestXMLGenerater();
 
             Profile = new XmlOperator();
+
+            SA = new SPEECH_API();
+            SA.Init();
+        }
+
+        ~App()
+        {
+            SA.Clear();
+           // Application.Current.Shutdown();
         }
 
         public void GuestXMLGenerater()

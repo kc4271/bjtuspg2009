@@ -2,18 +2,15 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     Title="Chaining" Height="560" Width="800" Loaded="Page_Loaded" Unloaded="Page_Unloaded">
-    <Canvas>
-        <TextBox Style="{DynamicResource BasicTextBox-Sketch}" TextWrapping="NoWrap" HorizontalAlignment="Right" Width="208.375" FontSize="45" Name="txtAnswer" Height="51.677" VerticalAlignment="Bottom" Canvas.Left="38.341" Canvas.Top="153.364" MaxLines="1" MaxLength="10" />
-        <TextBlock Style="{DynamicResource BodyCenter-Sketch}" Height="50" Width="256.718" FontSize="45" Canvas.Left="373.408" Canvas.Top="153.364" Name="txtQuestion"></TextBlock>
-        <TextBlock Style="{DynamicResource BodyCenter-Sketch}" Height="50.01" Width="208.375" FontSize="25" Canvas.Left="38.341" Canvas.Top="36.674" Name="txtScore" />
-        <TextBlock Style="{DynamicResource BodyCenter-Sketch}" Height="50.01" Width="208.375" FontSize="25" Canvas.Left="555.111" Canvas.Top="36.674" Name="txtPassLeft" />
-        <TextBlock Style="{DynamicResource BodyCenter-Sketch}" Height="50.01" Width="800" FontSize="40" Canvas.Left="0" Canvas.Top="236.714" Name="txtStatus" />
-        <Button Style="{DynamicResource Button-Sketch}" Name="btnSubmit" Height="50.01" Width="116.69" Click="btnSubmit_Click" FontSize="32" Content="确认" Canvas.Left="258.385" Canvas.Top="153.364" />
-        <Button Canvas.Left="645.129" Canvas.Top="155.041" FontSize="32" Height="50" Name="btnPass" Style="{DynamicResource Button-Sketch}" Width="118.357" Click="btnPass_Click">PASS</Button>
-        <TextBlock Canvas.Left="0" Canvas.Top="529.994" FontSize="25" Height="30.006" Style="{DynamicResource BodyCenter-Sketch}" Name="txtDebug" Width="800" />
-        <Image Canvas.Left="182.716" Canvas.Top="301.727" Height="63.346" Name="image1" Stretch="Fill" Width="64" Source="/SPG;component/Resources/Animal/Stand1.png" />
-        <Button Style="{DynamicResource Button-Sketch}" Name="btnItem1" Height="50.01" Width="150.03" FontSize="32" Content="道具1" Canvas.Left="50" Canvas.Top="443.422" Click="btnItem1_Click" ToolTip="增加一次Pass机会"/>
-        <Button Style="{DynamicResource Button-Sketch}" Name="btnItem2" Height="50.01" Width="150.03" FontSize="32" Content="道具2" Canvas.Left="225" Canvas.Top="443.422" Click="btnItem2_Click"  ToolTip="减一分换取一次提示"/>
-        <Button Style="{DynamicResource Button-Sketch}" Name="btnBack" Height="50.01" Width="100" Click="btnBack_Click"  FontSize="32" Content="放弃" Canvas.Left="663.486" Canvas.Top="443.422" />
+    <Canvas MouseLeftButtonDown="Canvas_MouseLeftButtonDown">
+        <Button Style="{DynamicResource Button-Sketch}" Name="btnBack" Height="50.01" Width="233.38" Click="btnBack_Click" FontSize="32" Content="放弃这个宝箱" Canvas.Left="515.103" Canvas.Top="476.762" />
+        <Button Style="{DynamicResource Button-Sketch}" Name="btnConfirm" Height="50.01" Width="83.35" Click="btnConfirm_Click" FontSize="32" Content="确认" Canvas.Left="260.052" Canvas.Top="398.413" IsDefault="True" />
+        <Button Style="{DynamicResource Button-Sketch}" Name="btnPass" Height="50.01" Width="83.35" Click="btnPass_Click" FontSize="32" Content="放弃" Canvas.Left="356.738" Canvas.Top="398.413" />
+        <Button Style="{DynamicResource Button-Sketch}" Name="btnShowAnswer" Click ="btnShowAnswer_Click" Height="50.01" Canvas.Left="453.424" Canvas.Top="399.413" Width="83.35" Content = "提示" FontSize="32"/>
+        <TextBlock Style="{DynamicResource BodyCenter-Sketch}" Height="50.01" Width="450.09" FontSize="40" Canvas.Left="58.345" Canvas.Top="476.762" Name="txtStatus" TextAlignment="Left" />
+        <TextBlock Style="{DynamicResource BodyCenter-Sketch}" Height="116" Width="295.059" FontSize="23" Canvas.Left="453.424" Canvas.Top="55.011" Name="txtScore" HorizontalAlignment="Left" VerticalAlignment="Center" />
+        <TextBox Style="{DynamicResource BasicTextBox-Sketch}" Canvas.Left="58.345" Canvas.Top="55.011" Height="313.396" Name="txtLog" Width="380.076" VerticalScrollBarVisibility="Auto" IsReadOnly="True" FontSize="32" />
+        <TextBox Style="{DynamicResource BasicTextBox-Sketch}" Canvas.Left="58.345" Canvas.Top="398.413" Height="50.01" Name="txtAnswer" Width="178.369" FontSize="32" BorderThickness="2" HorizontalAlignment="Center" ForceCursor="True" VerticalAlignment="Center" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Disabled" VerticalContentAlignment="Center" MaxLength="4" />
+        <Rectangle Canvas.Left="12" Canvas.Top="399.413" Height="19" Name="runMode" Stroke="Black" Width="30" />
     </Canvas>
 </Page>

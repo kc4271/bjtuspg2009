@@ -1,267 +1,162 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
+using System.Threading;
+using System.Text.RegularExpressions;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Data;
-using System.Data.OleDb;
-using System.Configuration;
 
 namespace Demo
 {
-    /// <summary>
-    /// Chaining.xaml 的交互逻辑
-    /// </summary>
     public partial class Chaining : Page
     {
-        private Random ro = new Random();
-        private int iScore;
-        private int iPass;
-        private int iWinScore;
+        private int iScore = 10;
+        private int iPass = 10;
+        private string status = "请说话:";
+        private string info = "您需要根据\n宝箱提出的成语做接龙游戏~";
+        private IdiomsDB DB;
 
-        OleDbConnection conn = new OleDbConnection();   // 创建数据库连接对象
+        private bool Running = true;
+        public delegate void TextBoxUpdaterDelegate(TextBox tb, string s);
+        public delegate void RectangleUpdateDelegate(int mode);
+        Thread oThread;
 
-        /// <summary>
-        /// 页面载入初始化, 初始化当前得分,pass次数,胜利分数,提示文字,数据库连接,随机产生一个成语
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            iScore = 0;     // 当前得分
-            iPass = 10;     // Pass次数
-            iWinScore = 5;  // 赢得本局需要的得分
-
-            txtScore.Text = "分数:" + iScore.ToString();
-            txtPassLeft.Text = "剩余 " + iPass.ToString() + " 次机会";
-            MessageBox.Show("打开本宝箱需要回答对" + iWinScore.ToString() + "个问题,你有" + iPass.ToString() + "次Pass的机会,加油哦~");
-
-            conn.ConnectionString = ConfigurationManager.ConnectionStrings["dbConnectionString"].ConnectionString;
-            conn.Open();
-
-            LoadIdioms();
+            DB = new IdiomsDB();
+            txtLog.Text += "宝箱:\t" + DB.GetIdiom();
+            txtStatus.Text = status;
+            refresh(true);
+            Running = true;
+            App.SA.SetDic(DB.GetLastpy());
+            App.SA.StartRec();
+            App.SA.SwitchOn();
+            oThread = new Thread(new ThreadStart(RUN));
+            oThread.Start();
+            runMode.Fill = Brushes.Red;
+            
         }
 
-        /// <summary>
-        /// 随机产生一个成语
-        /// </summary>
-        private void LoadIdioms()
+        private void RUN()
         {
-            int iRandom;
-            while (true)
+            while (Running)
             {
-                iRandom = ro.Next(13000);   // 数据库记录数
-                if (iRandom > 0)
-                    break;
-            }
-            try
-            {
-                OleDbCommand cmd = new OleDbCommand("SELECT ChengYu FROM ChengYu WHERE id = @id", conn);
-                cmd.Parameters.AddWithValue("id", iRandom);
-               
-                OleDbDataReader reader = cmd.ExecuteReader();
-                if (reader.Read())
+                this.runMode.Dispatcher.BeginInvoke
+                    (new RectangleUpdateDelegate(RectangleUpdater), App.SA.GetStatus());
+                if (App.SA.HasNewResult())
                 {
-                    txtQuestion.Text = reader[0].ToString();
+                    if (this.txtAnswer != null)
+                    {
+                        this.txtAnswer.Dispatcher.BeginInvoke
+                            (new TextBoxUpdaterDelegate(TextBoxUpdater), 
+                            this.txtAnswer, App.SA.GetResult());
+                    }
+                    App.SA.Reply();
                 }
+                Thread.Sleep(30);
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("LoadIdioms Function Exception!");
-                MessageBox.Show(ex.ToString());
-            }
+            
         }
 
-        /// <summary>
-        /// 随机产生以sLastCharacter开头的成语
-        /// </summary>
-        /// <param name="sLastCharacter">成语首字</param>
-        private void LoadIdioms(String sLastCharacter)
+        public void TextBoxUpdater(TextBox tb, string s)
         {
-            try
-            {
-                DataSet ds = new DataSet();
-                OleDbDataAdapter adapter = new OleDbDataAdapter("SELECT ChengYu FROM ChengYu WHERE ChengYu LIKE '" + sLastCharacter + "%'", conn);
-                adapter.Fill(ds);
+            s = Regex.Replace(s, @"[0-9,\.,\:, ,D,\$,X]", "");
+            if(s.Length != 0)
+                txtAnswer.Text = s;
+        }
 
-                int rs = ds.Tables[0].Rows.Count;   // 以sLastCharacter开头的成语的个数
-                if (rs > 0)
-                {
-                    txtQuestion.Text = ds.Tables[0].Rows[ro.Next(rs)].ItemArray[0].ToString();
-                }
-                else
-                {
-                    txtStatus.Text = "没有以\"" + sLastCharacter + "\"开头的成语,加一次Pass机会";
-                    iPass++;
-                    txtPassLeft.Text = "剩余 " + iPass.ToString() + " 次机会";
-                    LoadIdioms();
-                }
-            }
-            catch (Exception ex)
+        public void RectangleUpdater(int mode)
+        {
+            switch (mode)
             {
-                MessageBox.Show("LoadIdioms(string) Function Exception!");
-                MessageBox.Show(ex.ToString());
+                case 0: runMode.Fill = Brushes.Red; break;
+                case 1: runMode.Fill = Brushes.Orange; break;
+                case 2: runMode.Fill = Brushes.Yellow; break;
+                case 3: runMode.Fill = Brushes.Green; break;
+                case 4: runMode.Fill = Brushes.Magenta; break;
             }
         }
 
-        /// <summary>
-        /// 确认后判定所输入单词是否合法,是否为所要求的成语
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnSubmit_Click(object sender, RoutedEventArgs e)
+        private void refresh(bool update)
         {
-            txtDebug.Text = ""; // 清空提示框
+            if (update)
+            {
+                String A = App.SA.GetCurrDic();
+                String B = DB.GetLastpy();
+                if (A != B)
+                {
+                    App.SA.EndRec();
+                    App.SA.SetDic(DB.GetLastpy());
+                }
+            }
+            txtLog.ScrollToEnd();
+            if (iScore == 0)
+            {
+                MessageBox.Show("成功打开宝箱,恭喜您!");
+                this.NavigationService.Navigate(new Uri("Adventure.xaml", UriKind.Relative));
+            }
+            info = "还需要答对" + iScore + "个成语完成任务\n还有" + iPass + "次放弃机会";
+            txtScore.Text = info;
+            txtAnswer.Clear();
+            txtAnswer.Focus();
+        }
 
-            if (txtAnswer.Text == "" || txtAnswer.Text.Substring(0, 1) != txtQuestion.Text.Substring(txtQuestion.Text.Length - 1, 1))
+        private void btnConfirm_Click(object sender, RoutedEventArgs e)
+        {
+            if (DB.CheckAnswer(txtAnswer.Text))
+            {
+                iScore--;
+                txtStatus.Text = "回答正确!";
+                txtLog.Text += "\n" + App.CurrentUser.pet + ":\t" + txtAnswer.Text;
+                txtLog.Text += "\n宝箱:\t" + DB.GetIdiom(DB.GetLastpy());
+                refresh(true);
+            }
+            else
             {
                 txtStatus.Text = "错误!";
-                return;
-            }
-            try
-            {
-                OleDbCommand cmd = new OleDbCommand("SELECT ChengYu FROM ChengYu WHERE ChengYu = @ChengYu", conn);
-                cmd.Parameters.AddWithValue("id", txtAnswer.Text);
-                
-                OleDbDataReader reader = cmd.ExecuteReader();
-                if (reader.Read())
-                {
-                    txtStatus.Text = "回答正确,加1分!";
-                    iScore++;
-                    txtScore.Text = "分数:" + iScore.ToString();
-                    if (iScore >= iWinScore)
-                    {
-                        MessageBox.Show("恭喜你顺利打开宝箱,获得" + (iWinScore * 100).ToString() + "金币!");
-                        App.CurrentUser.gold += iWinScore * 100;
-                        this.NavigationService.Navigate(new Uri("Adventure.xaml", UriKind.Relative));
-                    }
-                    else
-                    {
-                        LoadIdioms(txtAnswer.Text.Substring(txtAnswer.Text.Length - 1, 1));
-                    }
-                }
-                else
-                {
-                    txtStatus.Text = "这个词不是成语!";
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Submit Function Exception!");
-                MessageBox.Show(ex.ToString());
             }
         }
 
-        /// <summary>
-        /// Pass,给出答案并继续游戏,若无答案,重新生成
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void btnPass_Click(object sender, RoutedEventArgs e)
         {
-            if (iPass > 0)
+            if (iPass == 0)
+            {
+                MessageBox.Show("没有放弃机会了~");
+            }
+            else
             {
                 iPass--;
-                txtPassLeft.Text = "剩余 " + iPass.ToString() + " 次机会";
-                txtStatus.Text = "PASS";
-                LoadIdioms(txtQuestion.Text.Substring(txtQuestion.Text.Length - 1, 1));
-            }
-            else
-            {
-                MessageBox.Show("对不起,已经没有Pass机会了.");
-                //this.NavigationService.Navigate(new Uri("Adventure.xaml", UriKind.Relative));
+                txtLog.Text += "\n宝箱:\t" + DB.GetIdiom();
+                txtLog.ScrollToEnd();
+                refresh(true);
             }
         }
 
-        /// <summary>
-        /// 道具1,增加一次pass机会
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnItem1_Click(object sender, RoutedEventArgs e)
+        private void btnShowAnswer_Click(object sender, RoutedEventArgs e)
         {
-            if (App.CurrentUser.item1 > 0)
-            {
-                App.CurrentUser.item1--;
-                iPass++;
-                txtPassLeft.Text = "剩余 " + iPass.ToString() + " 次机会";
-                txtStatus.Text = "增加一次Pass机会";
-            }
-            else
-            {
-                MessageBox.Show("道具1不足,请到商店购买.");
-            }
+            MessageBox.Show(DB.ShowAnswer(DB.GetLastpy()));
+            refresh(false);
         }
 
-        /// <summary>
-        /// 道具2,提示答案
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnItem2_Click(object sender, RoutedEventArgs e)
-        {
-            if (App.CurrentUser.item2 > 0)
-            {
-                App.CurrentUser.item2--;    // 道具数量减一
-
-                // 更新分数显示
-                iScore--;
-                txtScore.Text = "分数:" + iScore.ToString();
-
-                try
-                {
-                    DataSet ds = new DataSet();
-                    OleDbDataAdapter adapter = new OleDbDataAdapter("SELECT ChengYu FROM ChengYu WHERE ChengYu LIKE '" +
-                        txtQuestion.Text.Substring(txtQuestion.Text.Length - 1, 1) + "%'", conn);
-                    adapter.Fill(ds);
-                    int rs = ds.Tables[0].Rows.Count;
-                    if (rs > 0)
-                    {
-                        txtDebug.Text = ds.Tables[0].Rows[ro.Next(rs)].ItemArray[0].ToString();
-                    }
-                    else
-                    {
-                        txtDebug.Text = "这个我也不会...";
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Item2 Function Exception!");
-                    MessageBox.Show(ex.ToString());
-                }
-            }
-            else
-            {
-                MessageBox.Show("道具2不足,请到商店购买.");
-            }
-
-        }
-
-        /// <summary>
-        /// 返回
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnBack_Click(object sender, RoutedEventArgs e)
-        {
-            this.NavigationService.Navigate(new Uri("Adventure.xaml", UriKind.Relative));
-        }
-
-        /// <summary>
-        /// 卸载页面,关闭数据库连接
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Page_Unloaded(object sender, RoutedEventArgs e)
         {
-            conn.Close();   // 关闭数据库连接
+            DB.CloseDB();
+
+            Running = false;
+            App.SA.SwitchOff();
+        }
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("您确定要放弃这个宝箱吗?\n现在放弃可能得不到奖励喔",
+                "确认放弃", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                this.NavigationService.Navigate(new Uri("Adventure.xaml", UriKind.Relative));
+            }
+        }
+
+        private void Canvas_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            txtAnswer.Text = "";
         }
     }
 }

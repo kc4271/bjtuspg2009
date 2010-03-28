@@ -38,7 +38,7 @@ namespace Demo
             // 加载宠物
             Animal = new CAnimalControl();
             Animal.Load(CurrentCarrier, COriginalInfo.nGameMainMapInfo);
-            MoveTo.X = Animal.AnimalWindowX;
+            MoveTo.X = Animal.WindowX;
 
              DispatcherTimer dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(Current_Tick);
@@ -48,19 +48,29 @@ namespace Demo
 
         private void Current_Tick(object sender, EventArgs e)
         {
-            if (Math.Abs(Animal.AnimalWindowX - MoveTo.X) > Animal.AnimalMoveSpeed)
+            if (Math.Abs(Animal.WindowX - MoveTo.X) > Animal.MoveUnit)
             {
                 Animal.isMoving = true;
-                if (MoveTo.X <= Animal.AnimalWindowX)
+                if (MoveTo.X <= Animal.WindowX)
                     Animal.nDirection = 0;
                 else
                     Animal.nDirection = 1;
+
+                if (Animal.WindowX < MoveTo.X)
+                {
+                    Animal.Move = Animal.MoveUnit;
+                }
+                else
+                {
+                    Animal.Move = -Animal.MoveUnit;
+                }
             }
             else
             {
                 Animal.isMoving = false;
             }
-            if (Animal.AnimalWindowX >= 700)
+
+            if (Animal.WindowX >= 700)
             {
                 if (this.NavigationService == null)
                 {
@@ -76,7 +86,6 @@ namespace Demo
             if (pMousePos.Y < LowestLine)
                 return;
             MoveTo = pMousePos;
-            Animal.MoveTo = MoveTo;
         }
         private void btnAdventure_Click(object sender, RoutedEventArgs e)
         {

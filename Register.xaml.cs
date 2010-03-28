@@ -1,16 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Configuration;
 using System.Xml.Linq;
 using System.Xml.XPath;
 
@@ -23,10 +13,17 @@ namespace Demo
     {
         private void btnConfirm_Click(object sender, RoutedEventArgs e)
         {
+            if (txtUsername.Text == "" || txtPetname.Text == "")
+            {
+                txtUsername.Text = "玩家1";
+                txtPetname.Text = "旺财";
+                return;
+            }
+
             // 修改CurrentUser
             App.CurrentUser.name = txtUsername.Text;
             App.CurrentUser.gold = 888;
-            App.CurrentUser.pet = "0";  // 宠物选择
+            App.CurrentUser.pet = txtPetname.Text;  // 宠物选择
             App.CurrentUser.item1 = 5;
             App.CurrentUser.item2 = 5;
 
@@ -46,6 +43,7 @@ namespace Demo
                 XDocument myDoc = XDocument.Load("Profile/Profile.xml");
                 XElement parentXElement = myDoc.XPathSelectElement("Profile");
                 parentXElement.Add(new XElement("Name", App.CurrentUser.name));
+                parentXElement.Add(new XElement("Pet", App.CurrentUser.pet));
                 myDoc.Save("Profile/Profile.xml");
             }
             catch (Exception ex)
