@@ -4,6 +4,5 @@
     xmlns:game="clr-namespace:Demo"
     Title="Adventure" Height="560" Width="800" Loaded="Page_Loaded">
     <Canvas x:Name="CurrentCarrier">
-        
     </Canvas>
 </game:GamePage>

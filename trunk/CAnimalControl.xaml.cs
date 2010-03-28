@@ -20,16 +20,15 @@ namespace Demo
     /// </summary>
     public partial class CAnimalControl : UserControl
     {
-        CElementInfo AnimalInfo;
+        CElementInfo Info;
         Image Sprite;
         int nCurrentFrame;
         Point CurrentPos;
         int? nIndexOfPage;
 
         public bool isMoving;
-        public int AnimalMoveSpeed;
+        public int MoveUnit;
         public int nDirection;
-        public Point MoveTo;
         public CAnimalControl()
         {
             InitializeComponent();
@@ -38,24 +37,21 @@ namespace Demo
             nCurrentFrame = 0;
             nDirection = 1;
             isMoving = false;
-            AnimalMoveSpeed = 10;
+            MoveUnit = 10;
             CurrentPos = new Point();
-            MoveTo = new Point();
         }
 
         public void Load(Canvas Carrier,int page)
         {
             nIndexOfPage = page;
-            AnimalInfo = COriginalInfo.FillMapData(COriginalInfo.nDogInfo, nIndexOfPage.Value);
-            CurrentPos.X = AnimalInfo.nX;
-            CurrentPos.Y = AnimalInfo.nY;
+            Info = COriginalInfo.FillMapData(COriginalInfo.nDogInfo, nIndexOfPage.Value);
+            CurrentPos.X = Info.nX;
+            CurrentPos.Y = Info.nY;
             
             Sprite = new Image();
             Carrier.Children.Add(Sprite);
-            Canvas.SetLeft(Sprite, AnimalInfo.nX);
-            Canvas.SetTop(Sprite, AnimalInfo.nY);
-
-            MoveTo.X = AnimalWindowX;
+            Canvas.SetLeft(Sprite, Info.nX);
+            Canvas.SetTop(Sprite, Info.nY);
 
             DispatcherTimer AnimalTimer = new DispatcherTimer();
             AnimalTimer.Tick += new EventHandler(Animal_Tick);
@@ -77,8 +73,8 @@ namespace Demo
             if (isMoving)
             {
                 Sprite.Source = cutImage(@"Resources\Animal\Doggy.png", 
-                    nCurrentFrame, nDirection, AnimalInfo.nWidth, AnimalInfo.nHeight);
-                nCurrentFrame = (nCurrentFrame + 1) % AnimalInfo.nColumn;
+                    nCurrentFrame, nDirection, Info.nWidth, Info.nHeight);
+                nCurrentFrame = (nCurrentFrame + 1) % Info.nColumn;
             }
             else
             {
@@ -86,24 +82,17 @@ namespace Demo
                (new Uri(@"Resources\Animal\Stand" + nDirection + ".png",
                    UriKind.Relative)));
             }
-
-            if (Math.Abs(MoveTo.X - AnimalWindowX) > AnimalMoveSpeed)
-            {
-                if (MoveTo.X - AnimalWindowX > 0)
-                {
-                    AnimalWindowX = AnimalWindowX + AnimalMoveSpeed;
-                }
-                else
-                {
-                    AnimalWindowX = AnimalWindowX - AnimalMoveSpeed;
-                }
-            }
         }
 
-        public double AnimalWindowX
+        public double WindowX
         {
-            get { return Canvas.GetLeft(Sprite) + AnimalInfo.nWidth/2;}
-            set { Canvas.SetLeft(Sprite, value - AnimalInfo.nWidth/2);}
+            get { return Canvas.GetLeft(Sprite) + Info.nWidth/2;}
+            set { Canvas.SetLeft(Sprite, value - Info.nWidth/2);}
+        }
+
+        public double Move
+        {
+            set { WindowX = WindowX + value;}
         }
     }
 }

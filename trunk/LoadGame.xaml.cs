@@ -93,7 +93,7 @@ namespace Demo
             try
             {
                 string str = "Profile/" + listBox1.SelectedItem.ToString() + ".xml";
-                MessageBox.Show(str);
+                //MessageBox.Show(str);
                 App.Profile.XmlReload(str);
                 App.Profile.GetXmlReader();
             }

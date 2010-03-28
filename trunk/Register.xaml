@@ -4,14 +4,12 @@
     Title="Register" Height="560" Width="800" >
     <Canvas>
         <TextBlock Style="{DynamicResource TitleCenter-Sketch}" Height="46.676" Width="200" Canvas.Left="300" Canvas.Top="51.677" Text="创建新档案"  />
-        <TextBlock Style="{DynamicResource BodyCenter-Sketch}" Height="50.01" Width="185.037" FontSize="32" Canvas.Left="100" Canvas.Top="158.365">请选择宠物:</TextBlock>
-        <TextBlock Style="{DynamicResource BodyCenter-Sketch}" Height="50.01" Width="148.363" FontSize="32" Canvas.Left="440" Canvas.Top="158.365">输入名字:</TextBlock>
-        <TextBox Style="{DynamicResource BasicTextBox-Sketch}" TextWrapping="NoWrap" Height="52"  Width="280.056" FontSize="45" Canvas.Left="440.088" Canvas.Top="244.5" Name="txtUsername" />
+        <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Height="50.01" Width="301.236" FontSize="32" Canvas.Left="448.764" Canvas.Top="151.697">宠物名字:</TextBlock>
+        <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Height="50.01" Width="280.056" FontSize="32" Canvas.Left="76.682" Canvas.Top="151.697">请输入您的档案名:</TextBlock>
+        <TextBox Style="{DynamicResource BasicTextBox-Sketch}" TextWrapping="NoWrap" Height="51.677"  Width="280.056" FontSize="45" Canvas.Left="80.016" Canvas.Top="238.381" Name="txtUsername" />
         <Button Style="{DynamicResource Button-Sketch}" Name="btnConfirm" Width="200" FontSize="32" Height="50" Click="btnConfirm_Click" Canvas.Left="300" Canvas.Top="470">确定</Button>
         <Button Style="{DynamicResource Button-Sketch}" Name="btnCancel" Width="200" FontSize="32" Height="50" Click="btnCancel_Click" Canvas.Left="550" Canvas.Top="470">取消</Button>
-        
-        <RadioButton Style="{DynamicResource RadioButton-Sketch}" Content="Tom" Height="50" Width="200" FontSize="40" Canvas.Left="100" Canvas.Top="250"/>
-        <RadioButton Style="{DynamicResource RadioButton-Sketch}" Content="Jerry" Height="50"  Width="200" FontSize="40"  Canvas.Left="100" Canvas.Top="320" />
-    
+        <TextBox Style="{DynamicResource BasicTextBox-Sketch}" TextWrapping="NoWrap" Height="51.677"  Width="235.047" FontSize="45" Canvas.Left="448.764" Canvas.Top="238.381" Name="txtPetname" />
+
     </Canvas>
 </Page>

@@ -28,5 +28,10 @@ namespace Demo
         {
             this.NavigationService.Navigate(new Uri("GameMain.xaml", UriKind.Relative));
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
