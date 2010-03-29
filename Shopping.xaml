@@ -14,7 +14,7 @@
                 <ComboBoxItem>5</ComboBoxItem>
                 <ComboBoxItem>10</ComboBoxItem>
             </ComboBox>
-            <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Height="50" Width="334" Text="个物品1,单价50金币" FontSize="35"/>
+            <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Height="50" Width="334" Text="个提示道具,单价50金币" FontSize="35"/>
             <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Name="txtItem1" Height="50" Width="196" FontSize="35"/>
         </StackPanel>
         <StackPanel Canvas.Left="52" Canvas.Top="218" Height="50" Name="stackPanel2" Width="706.485" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
@@ -25,7 +25,7 @@
                 <ComboBoxItem>5</ComboBoxItem>
                 <ComboBoxItem>10</ComboBoxItem>
             </ComboBox>
-            <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Height="50" Width="342" Text="个物品2,单价100金币" FontSize="35"/>
+            <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Height="50" Width="342" Text="个食物,单价100金币" FontSize="35"/>
             <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Name="txtItem2" Height="50" Width="196" FontSize="35"/>
         </StackPanel>
         <TextBlock Style="{DynamicResource BasicTextBlock-Sketch}" Name="txtPrice" Height="50" Width="626.604" Text="总价:" FontSize="35" Canvas.Left="100" Canvas.Top="300" />

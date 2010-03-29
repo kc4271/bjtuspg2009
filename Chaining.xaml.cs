@@ -10,9 +10,9 @@ namespace Demo
     public partial class Chaining : Page
     {
         private int iScore = 10;
-        private int iPass = 10;
+        private int iPass = 5;
         private string status = "请说话:";
-        private string info = "您需要根据\n宝箱提出的成语做接龙游戏~";
+        private string info = "您需要完成成语接龙游戏\n来打开宝箱得到金币";
         private IdiomsDB DB;
 
         private bool Running = true;
@@ -22,6 +22,7 @@ namespace Demo
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+           
             DB = new IdiomsDB();
             txtLog.Text += "宝箱:\t" + DB.GetIdiom();
             txtStatus.Text = status;
@@ -54,7 +55,6 @@ namespace Demo
                 }
                 Thread.Sleep(30);
             }
-            
         }
 
         public void TextBoxUpdater(TextBox tb, string s)
@@ -92,9 +92,10 @@ namespace Demo
             if (iScore == 0)
             {
                 MessageBox.Show("成功打开宝箱,恭喜您!");
+                App.CurrentUser.gold += 500;
                 this.NavigationService.Navigate(new Uri("Adventure.xaml", UriKind.Relative));
             }
-            info = "还需要答对" + iScore + "个成语完成任务\n还有" + iPass + "次放弃机会";
+            info = "还需要答对" + iScore + "个成语完成任务\n还有" + iPass + "次放弃机会\n剩余" + App.CurrentUser.item1.ToString() + "个提示道具.";
             txtScore.Text = info;
             txtAnswer.Clear();
             txtAnswer.Focus();
@@ -133,7 +134,15 @@ namespace Demo
 
         private void btnShowAnswer_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(DB.ShowAnswer(DB.GetLastpy()));
+            if (App.CurrentUser.item1 > 0)
+            {
+                App.CurrentUser.item1--;
+                MessageBox.Show(DB.ShowAnswer(DB.GetLastpy()));
+            }
+            else
+            {
+                MessageBox.Show("对不起,您已经没有提示道具了,请到商店里购买.");
+            }
             refresh(false);
         }
 
