@@ -40,7 +40,7 @@ namespace Demo
             Profile = new XmlOperator();
 
             SA = new SPEECH_API();
-            SA.Init();
+            SA.Init("TRec.cfg",@"Resources\Rec\diclist");
         }
 
         ~App()
