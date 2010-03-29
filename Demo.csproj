@@ -52,7 +52,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Expression.Prototyping.SketchControls, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
-    <Reference Include="SPEECH_API, Version=1.0.3739.23516, Culture=neutral, processorArchitecture=x86">
+    <Reference Include="SPEECH_API, Version=1.0.3740.35115, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\SPEECH_API.dll</HintPath>
     </Reference>
