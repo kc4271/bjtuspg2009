@@ -29,18 +29,21 @@ namespace Demo
         {
             // 加载用户信息
             txtUsername.Text = "HI," + App.CurrentUser.name;
-            txtUsergold.Text = App.CurrentUser.gold.ToString() + "金币";
+            txtDogInfo.Text = string.Format(
+                "宠物:{0} 体力:{1}\n金币:{2} 食物:{3}",
+                App.CurrentUser.pet, App.CurrentUser.energy.ToString(), App.CurrentUser.gold.ToString(), App.CurrentUser.food.ToString());
+
 
             // 加载背景
-            Load(CurrentCarrier,COriginalInfo.nGameMainMapInfo);
+            Load(CurrentCarrier, COriginalInfo.nGameMainMapInfo);
             BaseCarrier.MouseLeftButtonDown += new MouseButtonEventHandler(this.Carrier_MouseLeftButtonDown);
-            
+
             // 加载宠物
             Animal = new CAnimalControl();
             Animal.Load(CurrentCarrier, COriginalInfo.nGameMainMapInfo);
             MoveTo.X = Animal.WindowX;
 
-             DispatcherTimer dispatcherTimer = new DispatcherTimer();
+            DispatcherTimer dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(Current_Tick);
             dispatcherTimer.Interval = TimeSpan.FromMilliseconds(40);
             dispatcherTimer.Start();
@@ -87,6 +90,7 @@ namespace Demo
                 return;
             MoveTo = pMousePos;
         }
+
         private void btnAdventure_Click(object sender, RoutedEventArgs e)
         {
             this.NavigationService.Navigate(new Uri("Adventure.xaml", UriKind.Relative));
@@ -94,7 +98,20 @@ namespace Demo
 
         private void btnFeed_Click(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.Navigate(new Uri("Feed.xaml", UriKind.Relative));
+            if (App.CurrentUser.food > 0)
+            {
+                App.CurrentUser.food--;
+                App.CurrentUser.energy += 10;
+                txtDogInfo.Text = string.Format(
+                "宠物:{0} 体力:{1}\n金币:{2} 食物:{3}",
+                App.CurrentUser.pet, App.CurrentUser.energy.ToString(), App.CurrentUser.gold.ToString(), App.CurrentUser.food.ToString());
+
+            }
+            else
+            {
+                MessageBox.Show("您的食物不足,请到商店购买~");
+            }
+
         }
 
         private void btnShopping_Click(object sender, RoutedEventArgs e)
@@ -109,7 +126,7 @@ namespace Demo
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
-             // 存档
+            // 存档
             try
             {
                 App.Profile.SetXmlFile();
@@ -118,7 +135,7 @@ namespace Demo
             {
                 MessageBox.Show("存档异常" + ex.ToString());
             }
-           
+
             // 修改最后登录信息
             try
             {

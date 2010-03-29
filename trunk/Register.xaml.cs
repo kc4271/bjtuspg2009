@@ -22,8 +22,10 @@ namespace Demo
 
             // 修改CurrentUser
             App.CurrentUser.name = txtUsername.Text;
-            App.CurrentUser.gold = 888;
             App.CurrentUser.pet = txtPetname.Text;  // 宠物选择
+            App.CurrentUser.gold = 888;
+            App.CurrentUser.food = 10;
+            App.CurrentUser.energy = 100;
             App.CurrentUser.item1 = 5;
             App.CurrentUser.item2 = 5;
 
@@ -43,7 +45,6 @@ namespace Demo
                 XDocument myDoc = XDocument.Load("Profile/Profile.xml");
                 XElement parentXElement = myDoc.XPathSelectElement("Profile");
                 parentXElement.Add(new XElement("Name", App.CurrentUser.name));
-                parentXElement.Add(new XElement("Pet", App.CurrentUser.pet));
                 myDoc.Save("Profile/Profile.xml");
             }
             catch (Exception ex)

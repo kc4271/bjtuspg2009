@@ -134,6 +134,8 @@ namespace Demo
         public string name;
         public string pet;
         public int gold;
+        public int food;
+        public int energy;
         public int item1;
         public int item2;
     }
@@ -176,8 +178,10 @@ namespace Demo
             new XDeclaration("1.0", "utf-8", "yes"),
             new XElement("User",
                 new XElement("Name", App.CurrentUser.name),
-                new XElement("Gold", App.CurrentUser.gold.ToString()),
                 new XElement("Pet", App.CurrentUser.pet.ToString()),
+                new XElement("Gold", App.CurrentUser.gold.ToString()),
+                new XElement("Food", App.CurrentUser.food.ToString()),
+                new XElement("Energy", App.CurrentUser.energy.ToString()),
                 new XElement("Item1", App.CurrentUser.item1.ToString()),
                 new XElement("Item2", App.CurrentUser.item2.ToString())
                 )
@@ -190,6 +194,8 @@ namespace Demo
             App.CurrentUser.name = myDc.SelectSingleNode("User").SelectSingleNode("Name").InnerText;
             App.CurrentUser.pet = myDc.SelectSingleNode("User").SelectSingleNode("Pet").InnerText;
             App.CurrentUser.gold = int.Parse(myDc.SelectSingleNode("User").SelectSingleNode("Gold").InnerText);
+            App.CurrentUser.food = int.Parse(myDc.SelectSingleNode("User").SelectSingleNode("Food").InnerText);
+            App.CurrentUser.energy = int.Parse(myDc.SelectSingleNode("User").SelectSingleNode("Energy").InnerText);
             App.CurrentUser.item1 = int.Parse(myDc.SelectSingleNode("User").SelectSingleNode("Item1").InnerText);
             App.CurrentUser.item2 = int.Parse(myDc.SelectSingleNode("User").SelectSingleNode("Item2").InnerText);
         }
@@ -200,6 +206,8 @@ namespace Demo
             myDc.SelectSingleNode("User").SelectSingleNode("Name").InnerText = App.CurrentUser.name;
             myDc.SelectSingleNode("User").SelectSingleNode("Pet").InnerText = App.CurrentUser.pet;
             myDc.SelectSingleNode("User").SelectSingleNode("Gold").InnerText = App.CurrentUser.gold.ToString();
+            myDc.SelectSingleNode("User").SelectSingleNode("Food").InnerText = App.CurrentUser.food.ToString();
+            myDc.SelectSingleNode("User").SelectSingleNode("Energy").InnerText = App.CurrentUser.energy.ToString();
             myDc.SelectSingleNode("User").SelectSingleNode("Item1").InnerText = App.CurrentUser.item1.ToString();
             myDc.SelectSingleNode("User").SelectSingleNode("Item2").InnerText = App.CurrentUser.item2.ToString();
             myDc.Save(xmlPath);

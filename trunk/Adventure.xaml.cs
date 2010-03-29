@@ -30,6 +30,10 @@ namespace Demo
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
+            // 加载用户信息
+            txtUsername.Text = string.Format("宠物:{0} 体力:{1}", App.CurrentUser.pet, App.CurrentUser.energy.ToString());
+            txtDogInfo.Text = string.Format("提示道具:{0}", App.CurrentUser.item1.ToString());
+
             Load(CurrentCarrier, COriginalInfo.nAdventureMapInfo);
             BaseCarrier.MouseLeftButtonDown +=
                 new MouseButtonEventHandler(this.Carrier_MouseLeftButtonDown);
@@ -128,10 +132,14 @@ namespace Demo
                         }
                         if (nClickedElement != 1)
                         {
-                            LastAnimalPosX = Animal.WindowX;
-                            LastBackgroundX = BackgroundX;
-                            LastDirection = Animal.nDirection;
-                            this.NavigationService.Navigate(new Uri("Chaining.xaml", UriKind.Relative));
+                            if (checkenergy())
+                            {
+                                LastAnimalPosX = Animal.WindowX;
+                                LastBackgroundX = BackgroundX;
+                                LastDirection = Animal.nDirection;
+                                this.NavigationService.Navigate(new Uri("Chaining.xaml", UriKind.Relative));
+                            }
+
                         }
                         else
                         {
@@ -143,6 +151,20 @@ namespace Demo
                     }
                 }
                 isClickedSomeElement = false;
+            }
+        }
+
+        private bool checkenergy()
+        {
+            if (App.CurrentUser.energy < 10)
+            {
+                MessageBox.Show("宠物体力不足,请喂食~");
+                return false;
+            }
+            else
+            {
+                App.CurrentUser.energy -= 10;
+                return true;
             }
         }
 

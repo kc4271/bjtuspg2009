@@ -31,8 +31,9 @@ namespace Demo
             // 检查Profile文件
             FileInfo fi = new FileInfo("Profile/Profile.xml");
             if (!fi.Exists)
+            {
                 ProfileXMLGenerater();
-
+            }
 
             GuestXMLGenerater();
 
@@ -55,8 +56,10 @@ namespace Demo
             new XDeclaration("1.0", "utf-8", "yes"),
             new XElement("User",
                 new XElement("Name", "Guest"),
+                new XElement("Pet", "DOG"),
                 new XElement("Gold", 0),
-                new XElement("Pet", "0"),
+                new XElement("Food", 0),
+                new XElement("Energy", 0),
                 new XElement("Item1", 0),
                 new XElement("Item2", 0)
                 )

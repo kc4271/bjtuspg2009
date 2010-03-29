@@ -4,9 +4,8 @@
       xmlns:game="clr-namespace:Demo"
     Title="GameMain" Height="560" Width="800" Background="GhostWhite" Loaded="Page_Loaded">
     <Canvas x:Name="CurrentCarrier" MouseLeftButtonDown="Carrier_MouseLeftButtonDown">
-        <TextBlock Height="80.016" Width="310.062" HorizontalAlignment="Right" Margin="0,50,50,0"  VerticalAlignment="Top" Name="txtUsergold" Style="{DynamicResource BodyCenter-Sketch}" FontSize="32" Canvas.Left="440.088" Canvas.Top="0" />
+        <TextBlock Height="163.366" Width="309.912" HorizontalAlignment="Right" Margin="0,50,50,0"  VerticalAlignment="Top" Name="txtDogInfo" Style="{DynamicResource BodyCenter-Sketch}" FontSize="32" Canvas.Left="440.088" Canvas.Top="-10.002" />
         <TextBlock Height="80.016" Width="300.06" HorizontalAlignment="Left" Margin="50,50,0,0"  VerticalAlignment="Top" Name="txtUsername" Style="{DynamicResource BodyCenter-Sketch}" FontSize="32" Canvas.Left="0" Canvas.Top="0" />
-        
         <Button Height="50" Width="120" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="48,0,0,50" Name="btnAdventure" Click="btnAdventure_Click" Style="{DynamicResource Button-Sketch}" FontSize="28" Canvas.Left="2" Canvas.Top="470">寻宝</Button>
         <Button Height="50" Width="120.024" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="188,0,0,50" Name="btnFeed" Click="btnFeed_Click" Style="{DynamicResource Button-Sketch}" FontSize="28" Canvas.Left="5.001" Canvas.Top="470">喂食</Button>
         <Button Height="50" VerticalAlignment="Bottom" Margin="328,0,352,50" Name="btnShopping" Click="btnShopping_Click"  Style="{DynamicResource Button-Sketch}" FontSize="28" Canvas.Left="8.335" Canvas.Top="470" Width="110.022">购物</Button>

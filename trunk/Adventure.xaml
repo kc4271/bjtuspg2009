@@ -4,5 +4,7 @@
     xmlns:game="clr-namespace:Demo"
     Title="Adventure" Height="560" Width="800" Loaded="Page_Loaded">
     <Canvas x:Name="CurrentCarrier">
+        <TextBlock Height="163.366" Width="310.062" HorizontalAlignment="Right" Margin="0,50,50,0"  VerticalAlignment="Top" Name="txtDogInfo" Style="{DynamicResource BodyCenter-Sketch}" FontSize="32" Canvas.Left="438.421" Canvas.Top="0" />
+        <TextBlock Height="80.016" Width="300.06" HorizontalAlignment="Left" Margin="50,50,0,0"  VerticalAlignment="Top" Name="txtUsername" Style="{DynamicResource BodyCenter-Sketch}" FontSize="32" Canvas.Left="0" Canvas.Top="0" />
     </Canvas>
 </game:GamePage>
